@@ -1,0 +1,11 @@
+#+title: Mi proyecto
+#+author: Ricardo Badillo
+#+date: [2019-02-19 dom 19:36]
+
+** Repositorio de Luna Menguante
+
+*Angeles Garcia Ivan
+*Badillo Macias Ricardo
+*Fernández del Valle Diego Marcial
+*Salcedo Ramos Carlos Uriel
+
