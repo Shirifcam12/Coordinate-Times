@@ -4,8 +4,8 @@
 
 ** Repositorio de Luna Menguante
 
-*Angeles Garcia Ivan
-*Badillo Macias Ricardo
-*Fernández del Valle Diego Marcial
-*Salcedo Ramos Carlos Uriel
+* Angeles Garcia Ivan
+* Badillo Macias Ricardo
+* Fernández del Valle Diego Marcial
+* Salcedo Ramos Carlos Uriel
 
