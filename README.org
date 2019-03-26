@@ -1,11 +1,18 @@
-#+title: Mi proyecto
-#+author: Ricardo Badillo
-#+date: [2019-02-19 dom 19:36]
+#+title: Luna Menguante
+#+author: /All
+#+date: [2019-02-26]
+Proyecto en maven.
 
-** Repositorio de Luna Menguante
+* ¿Cómo compilar el proyecto?
+mvn clean install
 
-* Angeles Garcia Ivan
-* Badillo Macias Ricardo
-* Fernández del Valle Diego Marcial
-* Salcedo Ramos Carlos Uriel
+mvn tomcat7:run
 
+* Nombres
+Angeles García Iván 312130974
+
+Badillo Macias Ricardo 31400405
+
+Fernández del Valle Diego Marcial
+
+Salcedo Ramos Carlos Uriel 314189820
