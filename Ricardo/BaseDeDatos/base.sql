@@ -5,7 +5,7 @@ CREATE TABLE Base.usuario(
 	nombreUsuario text NOT NULL,
 	contraseña text NOT NULL,
 	correo text NOT NULL,
-	tipo text NOT NULL,
+	tipo int NOT NULL,
 	CONSTRAINT id_Usuario_pkey PRIMARY KEY(idUsuario)
 );
 
