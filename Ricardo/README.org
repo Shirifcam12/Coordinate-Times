@@ -1,0 +1,18 @@
+#+title: Luna Menguante
+#+author: /All
+#+date: [2019-02-26]
+Proyecto en maven.
+
+* ¿Cómo compilar el proyecto?
+mvn clean install
+
+mvn tomcat7:run
+
+* Nombres
+Angeles García Iván 312130974
+
+Badillo Macias Ricardo 31400405
+
+Fernández del Valle Diego Marcial 314198039
+
+Salcedo Ramos Carlos Uriel 314189820

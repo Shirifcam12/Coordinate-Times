@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration">
+<hibernate-configuration>
+  <session-factory name="hibernate.cfg.xml">
+    <!-- SQL Dialect -->
+    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL94Dialect</property>
+    <!-- Database Connection Settings -->
+    <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+    <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/base</property>
+    <property name="hibernate.connection.username">ricardo</property>
+    <property name="hibernate.connection.password"/>
+    <property name="show_sql">true</property>
+    <!-- Specifying Session Context -->
+    <property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
+    <!-- Mapping With Model Class Containing Annotations -->
+    <mapping class="modelo.Usuario"/>
+    <mapping class="modelo.Tema" file="" jar="" package="" resource=""/>
+  </session-factory>
+</hibernate-configuration>

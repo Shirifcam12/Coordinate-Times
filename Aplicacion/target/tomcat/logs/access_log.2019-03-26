@@ -1,0 +1,5 @@
+127.0.0.1 - - [26/Mar/2019:14:36:38 -0600] "GET /mi-primer-aplicacion-web/ HTTP/1.1" 200 52 http-bio-8080-exec-1 712
+127.0.0.1 - - [26/Mar/2019:14:41:07 -0600] "GET /mi-primer-aplicacion-web/ HTTP/1.1" 200 52 http-bio-8080-exec-3 11
+127.0.0.1 - - [26/Mar/2019:14:41:21 -0600] "GET / HTTP/1.1" 404 - http-bio-8080-exec-4 0
+127.0.0.1 - - [26/Mar/2019:14:41:34 -0600] "GET /mi-primer-aplicacion-web HTTP/1.1" 302 - http-bio-8080-exec-5 0
+127.0.0.1 - - [26/Mar/2019:14:41:34 -0600] "GET /mi-primer-aplicacion-web/ HTTP/1.1" 200 52 http-bio-8080-exec-6 2
