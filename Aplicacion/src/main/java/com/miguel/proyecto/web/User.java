@@ -4,12 +4,20 @@ public class User {
 
     private String usuario;
     private String contraseña;
-    private String confirmacionContraseña;
+    
+    private String correo;
+    
+     public String getCorreo() {
+        return correo;
+    }
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
 
     public String getUsuario() {
         return usuario;
     }
-
+   
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
@@ -22,11 +30,4 @@ public class User {
         this.contraseña = contraseña;
     }
 
-    public String getConfirmacionContraseña() {
-        return confirmacionContraseña;
-    }
-
-    public void setConfirmacionContraseña(String confirmacionContraseña) {
-        this.confirmacionContraseña = confirmacionContraseña;
-    }
 }

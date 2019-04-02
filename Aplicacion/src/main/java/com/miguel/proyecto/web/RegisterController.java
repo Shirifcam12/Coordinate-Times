@@ -46,6 +46,10 @@ public class RegisterController {
             user = null;
         }
         
+        
         return null;
     }
+    public void findUser(){
+            u.find(user);
+        }
 }

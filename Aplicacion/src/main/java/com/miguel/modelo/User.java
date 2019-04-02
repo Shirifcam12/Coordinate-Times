@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(catalog = "test", schema = "datos", name = "user")
+@Table(catalog = "test", schema = "Base", name = "user")
 public class User {
 
     @Id
@@ -25,7 +25,7 @@ public class User {
     @Column(name = "correo")
     private String correo;
 
-    @Column(name = "contrasena")
+    @Column(name = "contraseña")
     private String contrasena;
 
     @Transient
