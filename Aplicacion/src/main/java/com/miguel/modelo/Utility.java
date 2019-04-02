@@ -26,6 +26,7 @@ public class Utility {
             if (null != sessionObj.getTransaction()) {
                 System.out.println("\n.......Transaction Is Being Rolled Back.......");
                 sessionObj.getTransaction().rollback();
+                
             }
             sqlException.printStackTrace();
         } finally {

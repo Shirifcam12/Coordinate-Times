@@ -45,6 +45,7 @@ public class RegisterController {
             u.save(user);
             user = null;
         }
+        
         return null;
     }
 }
