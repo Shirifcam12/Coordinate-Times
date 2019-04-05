@@ -5,6 +5,7 @@
  */
 package modelo;
 
+import javax.faces.bean.ManagedBean;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+@ManagedBean
 @Entity
 @Table(catalog = "base", schema = "Base", name = "marcador")
 public class Marcador {

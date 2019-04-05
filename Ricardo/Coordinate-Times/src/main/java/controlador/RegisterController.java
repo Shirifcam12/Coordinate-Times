@@ -36,6 +36,7 @@ public class RegisterController {
                     .addMessage(null,
                             new FacesMessage(FacesMessage.SEVERITY_INFO,
                                     "Felicidades, el registro se ha realizado correctamente", ""));
+            user.setTipo(1);
             u.save(user);
             user = null;
         return null;

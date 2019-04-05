@@ -14,14 +14,14 @@ import org.hibernate.Session;
  * @author ricardo
  */
 public class UtilityT {
-    static Usuario userObj;
+    static Tema temaObj;
     static Session sessionObj;
     
 public ArrayList<Tema> buscarTema(String tema){ 
-Query query = HibernateUtil.getCurrentSession().createQuery("FROM Tema c WHERE c.nombre = :tema");
-query.setParameter("tema", tema);
-ArrayList<Tema> temas = (ArrayList<Tema>) query.list();
-return temas;
-}
+    Query query = HibernateUtil.getCurrentSession().createQuery("FROM Tema c WHERE c.nombre = :tema");
+    query.setParameter("tema", tema);
+    ArrayList<Tema> temas = (ArrayList<Tema>) query.list();
+    return temas;
+ }
     
 }

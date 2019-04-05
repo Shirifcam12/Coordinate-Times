@@ -15,5 +15,6 @@
     <!-- Mapping With Model Class Containing Annotations -->
     <mapping class="modelo.Usuario"/>
     <mapping class="modelo.Tema" file="" jar="" package="" resource=""/>
+    <mapping class="modelo.Marcador"/>
   </session-factory>
 </hibernate-configuration>

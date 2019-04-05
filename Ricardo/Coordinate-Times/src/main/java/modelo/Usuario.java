@@ -1,5 +1,6 @@
 package modelo;
 
+import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,10 +15,12 @@ import javax.persistence.Transient;
 public class Usuario {
 
     @Id
-    @Column(name = "idUsuario")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "idusuario")
     private int id;
 
-    @Column(name = "nombreUsuario")
+    @Column(name = "nombreusuario")
     private String nombre;
 
     @Column(name = "contraseña")
@@ -27,7 +30,7 @@ public class Usuario {
     private String correo;
     
     @Column(name = "tipo")
-    private String tipo;
+    private int tipo;
 
 
     public int getId() {
@@ -62,12 +65,12 @@ public class Usuario {
         this.contraseña = contrasena;
     }
     
-    public String getTipo(){
+    public int getTipo(){
         return tipo;
     }
 	
-    public void setTipo(String tipo){
+    public void setTipo(int tipo){
 	this.tipo = tipo;
     }
-
+    
 }

@@ -18,6 +18,16 @@ and open the template in the editor.
         <h:body>
             <h:outputText value = "Si se encuentra registrado este tema"  />
         </h:body>
+        <h:panelGrid columns="1" cellpadding="5">
+      <p:commandButton value="Mostrar Marcadores" type="button" onclick="PF('dlg1').show();" />
+        </h:panelGrid>
+        <p:dialog header="Mostrar" widgetVar="dlg1" modal="true" height="100">
+        <h:outputText value="¿Deseas ver los marcadores relacionados a este tema?" />
+        <h:panelGrid>   <p:commandButton value="Mostrar" type="button"   onclick="PF('dlg2').show();"/> 
+                        <p:commandButton value="Cancelar" type="button" onclick="PF('dlg2').show();"/> 
+        </h:panelGrid>
+        
+       </p:dialog>
            
     </f:view>
 </html> 
