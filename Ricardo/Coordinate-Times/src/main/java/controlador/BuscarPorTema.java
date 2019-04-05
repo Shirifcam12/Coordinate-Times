@@ -5,13 +5,14 @@ import java.util.Locale;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import modelo.Tema;
 import modelo.UtilityT;
 
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class BuscarPorTema {
     private String nombre;
     private Tema user = new Tema();
