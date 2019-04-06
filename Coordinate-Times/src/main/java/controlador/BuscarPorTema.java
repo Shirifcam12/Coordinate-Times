@@ -15,16 +15,26 @@ import modelo.UtilityT;
 @SessionScoped
 public class BuscarPorTema {
     private String nombre;
-    private Tema user = new Tema();
+    static ArrayList<Tema> t = new ArrayList<Tema>();
     private UtilityT u = new UtilityT();
-    
-    public Tema getTema() {
-        return user;
+
+    public static ArrayList<Tema> getT() {
+        return t;
     }
 
-    public void setTema(Tema user) {
-        this.user = user;
+    public void setT(ArrayList<Tema> t) {
+        this.t = t;
     }
+
+    public UtilityT getU() {
+        return u;
+    }
+
+    public void setU(UtilityT u) {
+        this.u = u;
+    }
+    
+    
     
     public String getNombre(){
         return nombre;
@@ -41,12 +51,11 @@ public class BuscarPorTema {
 
     public String buscarTema() {
         
-        user = u.buscarTema(nombre);
-        System.out.println(user);
+        t = u.buscarTema(nombre);
         if(nombre == "" ){
             return "";
         }
-        if(user == null){
+        if(t.isEmpty()){
         return "noresultado?faces-redirect=true";
         }else{
         return "resultado?faces-redirect=true";

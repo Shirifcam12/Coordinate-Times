@@ -16,8 +16,7 @@ public class temaC{
         private Tema tema = new Tema();
         private Base u = new Base();
         private int usuario;
-        private UsuarioBean ub;
-        private BuscarPorTema bt = new BuscarPorTema();
+        
 
 
         public Tema getTema() {
@@ -50,7 +49,7 @@ public class temaC{
 			FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha eliminado correctamenten el tema", ""));
             
-              */u.eliminarT(bt.getTema());
+              */u.eliminarT(BuscarPorTema.getT().get(0));
                         
                         tema = null;
 		//}
