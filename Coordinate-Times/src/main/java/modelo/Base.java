@@ -9,9 +9,10 @@ import java.util.Locale;
 public class Base{
 
     static Session sessionObj;
+    private UsuarioBean a ;
 
     public void eliminarU(Usuario usuario){
-        Usuario condicion = UsuarioBean.getUsuario();
+        Usuario condicion = a.getUsuario();
         if(condicion.equals(usuario)){
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "No puedes eliminarte a ti mismo", ""));        

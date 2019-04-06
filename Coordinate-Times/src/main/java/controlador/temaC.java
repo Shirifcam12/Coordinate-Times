@@ -13,9 +13,11 @@ import modelo.Usuario;
 @ManagedBean
 @RequestScoped
 public class temaC{
-		private Tema tema = new Tema();
+        private Tema tema = new Tema();
         private Base u = new Base();
         private int usuario;
+        private UsuarioBean ub;
+        private BuscarPorTema bt = new BuscarPorTema();
 
 
         public Tema getTema() {
@@ -34,22 +36,25 @@ public class temaC{
         }
 	
 	public String eliminaTema(){		
-				if(UsuarioBean.getUsuario() != null){
+            /*
+				if(ub.getUsuario() == null){
                     FacesContext.getCurrentInstance().addMessage(null
                                                          , new FacesMessage(FacesMessage.SEVERITY_ERROR, "Inicia sesion para poder acceder a esta funcion", ""));
 
                 }else{
-                usuario = UsuarioBean.getUsuario().getTipo();
+                usuario = ub.getUsuario().getTipo();
                 if(usuario != 2 || usuario != 0){
 			FacesContext.getCurrentInstance().addMessage(null
                                                          , new FacesMessage(FacesMessage.SEVERITY_ERROR, "No dispones de permisos para eliminar Temas", ""));
 		} else{
 			FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha eliminado correctamenten el tema", ""));
-                        u.eliminarT(BuscarPorTema.getTema());
+            
+              */u.eliminarT(bt.getTema());
+                        
                         tema = null;
-		}
-        }		
+		//}
+        //}		
 		return null;
 	}
 

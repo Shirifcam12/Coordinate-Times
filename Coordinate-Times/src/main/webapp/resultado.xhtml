@@ -1,33 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-    <f:view>
-        <h:head>
-            <title>Resultado</title>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        </h:head>
-        <h:body>
-            <h:outputText value = "Si se encuentra registrado este tema"  />
-        </h:body>
-        <h:panelGrid columns="1" cellpadding="5">
-      <p:commandButton value="Mostrar Marcadores" type="button" onclick="PF('dlg1').show();" />
-        </h:panelGrid>
-        <p:dialog header="Mostrar" widgetVar="dlg1" modal="true" height="100">
-        <h:outputText value="¿Deseas ver los marcadores relacionados a este tema?" />
-        <h:panelGrid>   <p:commandButton value="Mostrar" type="button"   onclick="PF('dlg2').show();"/> 
-                        <p:commandButton value="Cancelar" type="button" onclick="PF('dlg2').show();"/> 
-        </h:panelGrid>
-        
-       </p:dialog>
-           
-    </f:view>
-</html> 
+    <h:head>
+        <title>Buscar</title>
+    </h:head>
+    <h:body>
+        <h1></h1> <br/>
+        <h:form id="myForm">
+            <table>
+                <tr><td>
+                        <p:messages id="messages" autoUpdate="true" closable="true" />
+                    </td></tr>
+            </table>
+            <table>
+                <tr>
+                    
+                    <td>
+			<p:commandButton action="#{temaC.eliminaTema()}" value="BuscarTema"/></td>
+                </tr>
+            </table>
+        </h:form>
+    </h:body>
+</html>
+

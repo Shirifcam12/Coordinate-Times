@@ -44,7 +44,6 @@ public class UsuarioBean {
     public String verificaDatos() throws Exception{
         
         UtilityU usUT=new UtilityU();
-        Usuario usuario;
         String resultado;
         try{
         usuario=usUT.verificaDatos(this.usuario);

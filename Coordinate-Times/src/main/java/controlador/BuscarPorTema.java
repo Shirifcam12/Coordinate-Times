@@ -40,7 +40,9 @@ public class BuscarPorTema {
     }
 
     public String buscarTema() {
+        
         user = u.buscarTema(nombre);
+        System.out.println(user);
         if(nombre == "" ){
             return "";
         }
