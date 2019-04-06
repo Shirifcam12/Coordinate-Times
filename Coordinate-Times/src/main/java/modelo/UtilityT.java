@@ -15,13 +15,25 @@ import org.hibernate.Session;
  */
 public class UtilityT {
     static Tema temaObj;
+    static Usuario userObj;
     static Session sessionObj;
+ 	private Usuario us = new Usuario();
+    private Tema temaoc = new Tema();
     
-public ArrayList<Tema> buscarTema(String tema){ 
-    Query query = HibernateUtil.getCurrentSession().createQuery("FROM Tema c WHERE c.nombre = :tema");
-    query.setParameter("tema", tema);
-    ArrayList<Tema> temas = (ArrayList<Tema>) query.list();
-    return temas;
- }
-    
-}
+	public Tema buscarTema(String tema){ 
+		Query query = HibernateUtil.getCurrentSession().createQuery("FROM Tema c WHERE c.nombre = :tema");
+		query.setParameter("tema", tema);
+		if(!query.list().isEmpty()){
+            temaoc=(Tema)query.list().get(0);
+        }
+		return temaoc;
+	}
+	public Usuario buscarPerfil(String correo){ 
+		Query query = HibernateUtil.getCurrentSession().createQuery("FROM Usuario c WHERE c.correo = :correo");
+		query.setParameter("correo", correo);
+		if(!query.list().isEmpty()){
+            us=(Usuario)query.list().get(0);
+        }
+		return us;
+	}
+}	    

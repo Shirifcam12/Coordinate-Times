@@ -24,6 +24,7 @@ import modelo.UtilityU;
 @SessionScoped
 public class UsuarioBean {
     private Usuario usuario=new Usuario();
+    private Usuario usuarioelimina = new Usuario();
 
     public Usuario getUsuario() {
         return usuario;
@@ -32,6 +33,14 @@ public class UsuarioBean {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+    public Usuario getUsuarioElimina() {
+        return usuarioelimina;
+    }
+
+    public void setUsuarioElimina(Usuario usuarioelimina) {
+        this.usuarioelimina = usuarioelimina;
+    }
+
     public String verificaDatos() throws Exception{
         
         UtilityU usUT=new UtilityU();

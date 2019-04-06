@@ -73,4 +73,12 @@ public class Usuario {
 	this.tipo = tipo;
     }
     
+    public boolean equals(Usuario u){
+        if(this.id == u.id && this.nombre == u.nombre && this.correo == u.correo 
+            && this.contraseña == u.contraseña && this.tipo == u.tipo){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

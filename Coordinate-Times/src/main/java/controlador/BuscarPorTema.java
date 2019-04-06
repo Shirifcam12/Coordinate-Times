@@ -17,15 +17,6 @@ public class BuscarPorTema {
     private String nombre;
     private Tema user = new Tema();
     private UtilityT u = new UtilityT();
-    private ArrayList<Tema> t = new ArrayList<Tema>();
-    private String e;
-    
-    public String getE(){
-        return e;
-    }
-    public void setE(String e){
-        this.e = e;
-    }
     
     public Tema getTema() {
         return user;
@@ -33,13 +24,6 @@ public class BuscarPorTema {
 
     public void setTema(Tema user) {
         this.user = user;
-    }
-    
-    public ArrayList<Tema> getT(){
-        return t;
-    }
-    public void setT(ArrayList<Tema> t){
-        this.t = t;
     }
     
     public String getNombre(){
@@ -56,23 +40,16 @@ public class BuscarPorTema {
     }
 
     public String buscarTema() {
-        t = u.buscarTema(nombre);
+        user = u.buscarTema(nombre);
         if(nombre == "" ){
             return "";
         }
-        if(t.size() == 0){
+        if(user == null){
         return "noresultado?faces-redirect=true";
         }else{
         return "resultado?faces-redirect=true";
         }
         
-    }
-    public void imprimir(){
-        e = "";
-        Iterator<Tema> iterador = t.iterator();
-        while(iterador.hasNext()){
-            e += iterador.next().getnombreT() + "\n";
-        }
     }
 }
 
