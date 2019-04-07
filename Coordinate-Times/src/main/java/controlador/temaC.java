@@ -35,25 +35,25 @@ public class temaC{
         }
 	
 	public String eliminaTema(){		
-            /*
-				if(ub.getUsuario() == null){
+            
+		if(UsuarioBean.getUsuario1() == null){
                     FacesContext.getCurrentInstance().addMessage(null
                                                          , new FacesMessage(FacesMessage.SEVERITY_ERROR, "Inicia sesion para poder acceder a esta funcion", ""));
 
                 }else{
-                usuario = ub.getUsuario().getTipo();
-                if(usuario != 2 || usuario != 0){
+                usuario = UsuarioBean.getUsuario1().getTipo();
+                if(usuario != 2 && usuario != 0){
 			FacesContext.getCurrentInstance().addMessage(null
                                                          , new FacesMessage(FacesMessage.SEVERITY_ERROR, "No dispones de permisos para eliminar Temas", ""));
 		} else{
 			FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha eliminado correctamenten el tema", ""));
             
-              */u.eliminarT(BuscarPorTema.getT().get(0));
+              u.eliminarT(BuscarPorTema.getT().get(0));
                         
                         tema = null;
-		//}
-        //}		
+		}
+        }		
 		return null;
 	}
 

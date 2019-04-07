@@ -14,7 +14,6 @@ public class perfilC{
 
         private Integer usuario;
         private Base u = new Base();
-        private UsuarioBean ub;
 
         public perfilC() {
             FacesContext.getCurrentInstance()
@@ -24,19 +23,19 @@ public class perfilC{
 	
 	public String eliminaPerfil(){
                 
-                if(ub.getUsuario() != null){
+                if(UsuarioBean.getUsuario1() != null){
                     FacesContext.getCurrentInstance().addMessage(null
                                                          , new FacesMessage(FacesMessage.SEVERITY_ERROR, "Inicia sesion para poder acceder a esta funcion", ""));
 
                 }else{
-                usuario = ub.getUsuario().getTipo();		
+                usuario = UsuarioBean.getUsuario1().getTipo();		
                 if(!usuario.equals(0)){
 			FacesContext.getCurrentInstance().addMessage(null
                                                          , new FacesMessage(FacesMessage.SEVERITY_ERROR, "El perfil a eliminar no existe", ""));
 		} else{
 			FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha eliminado correctamenten el perfil", ""));
-                        u.eliminarU(ub.getUsuarioElimina());
+                        u.eliminarU(UsuarioBean.getUsuarioelimina());
                         usuario = null;
 		}
                 }

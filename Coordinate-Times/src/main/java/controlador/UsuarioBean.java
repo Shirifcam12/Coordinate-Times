@@ -24,7 +24,8 @@ import modelo.UtilityU;
 @SessionScoped
 public class UsuarioBean {
     private Usuario usuario=new Usuario();
-    private Usuario usuarioelimina = new Usuario();
+    static Usuario usuarioelimina = new Usuario();
+    static Usuario usuario1;
 
     public Usuario getUsuario() {
         return usuario;
@@ -32,13 +33,6 @@ public class UsuarioBean {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-    }
-    public Usuario getUsuarioElimina() {
-        return usuarioelimina;
-    }
-
-    public void setUsuarioElimina(Usuario usuarioelimina) {
-        this.usuarioelimina = usuarioelimina;
     }
 
     public String verificaDatos() throws Exception{
@@ -48,6 +42,8 @@ public class UsuarioBean {
         try{
         usuario=usUT.verificaDatos(this.usuario);
         if(usuario!=null){
+            usuario1 = usuario;
+            usuarioelimina = usuario;
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario",usuario);
             resultado="exito";
         }else{
@@ -57,6 +53,22 @@ public class UsuarioBean {
             throw e;
         }
         return resultado;
+    }
+
+    public static Usuario getUsuarioelimina() {
+        return usuarioelimina;
+    }
+
+    public void setUsuarioelimina(Usuario usuarioelimina) {
+        this.usuarioelimina = usuarioelimina;
+    }
+
+    public static Usuario getUsuario1() {
+        return usuario1;
+    }
+
+    public static void setUsuario1(Usuario usuario1) {
+        UsuarioBean.usuario1 = usuario1;
     }
     public boolean verificarSesion(){
         boolean estado;
