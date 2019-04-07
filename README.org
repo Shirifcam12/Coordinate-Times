@@ -9,7 +9,7 @@ mvn clean install
 mvn tomcat7:run
 
 * Nombres
-Angeles García Iván 312130974
+
 
 Badillo Macias Ricardo 31400405
 
