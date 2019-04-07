@@ -12,11 +12,6 @@ public class Base{
     private UsuarioBean a ;
 
     public void eliminarU(Usuario usuario){
-        Usuario condicion = a.getUsuario();
-        if(condicion.equals(usuario)){
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "No puedes eliminarte a ti mismo", ""));        
-        }
         try {
             sessionObj = HibernateUtil.getSessionFactory().openSession();
             sessionObj.beginTransaction();

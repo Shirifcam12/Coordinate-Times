@@ -22,22 +22,27 @@ public class perfilC{
         }
 	
 	public String eliminaPerfil(){
-                
-                if(UsuarioBean.getUsuario1() != null){
+               Usuario condicion = UsuarioBean.getUsuario1();
+                if(UsuarioBean.getUsuario1() == null){
                     FacesContext.getCurrentInstance().addMessage(null
                                                          , new FacesMessage(FacesMessage.SEVERITY_ERROR, "Inicia sesion para poder acceder a esta funcion", ""));
 
                 }else{
                 usuario = UsuarioBean.getUsuario1().getTipo();		
-                if(!usuario.equals(0)){
+                if(usuario != 0){
 			FacesContext.getCurrentInstance().addMessage(null
-                                                         , new FacesMessage(FacesMessage.SEVERITY_ERROR, "El perfil a eliminar no existe", ""));
-		} else{
+                                                         , new FacesMessage(FacesMessage.SEVERITY_ERROR, "No tienes los permisos necesarios", ""));
+		}else{
+                 if(condicion.getCorreo()==(BuscarPorPerfil.getUs().get(0)).getCorreo()){
+                 FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "No puedes eliminarte a ti mismo", ""));        
+                }else{
 			FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha eliminado correctamenten el perfil", ""));
-                        u.eliminarU(UsuarioBean.getUsuarioelimina());
+                        u.eliminarU(BuscarPorPerfil.getUs().get(0));
                         usuario = null;
 		}
+                }
                 }
         return null;
 	}

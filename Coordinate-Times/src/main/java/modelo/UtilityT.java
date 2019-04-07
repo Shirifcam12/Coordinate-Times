@@ -26,12 +26,11 @@ public class UtilityT {
             ArrayList<Tema> temas = (ArrayList<Tema>) query.list();
             return temas;
 	}
-	public Usuario buscarPerfil(String correo){ 
-		Query query = HibernateUtil.getCurrentSession().createQuery("FROM Usuario c WHERE c.correo = :correo");
-		query.setParameter("correo", correo);
-		if(!query.list().isEmpty()){
-            us=(Usuario)query.list().get(0);
+	public ArrayList<Usuario> buscarPerfil(String correo){ 
+	    Query query = HibernateUtil.getCurrentSession().createQuery("FROM Usuario c WHERE c.correo = :correo");
+            query.setParameter("correo", correo);
+            ArrayList<Usuario> usuarios = (ArrayList<Usuario>) query.list();
+            return usuarios;
         }
-		return us;
-	}
+	
 }	    
