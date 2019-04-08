@@ -1,4 +1,6 @@
 package modelo;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import org.hibernate.Session;
 
 /**
@@ -16,12 +18,19 @@ public class Utility {
             sessionObj.beginTransaction();
             sessionObj.save(usuario);
             sessionObj.getTransaction().commit();
-        } catch (Exception sqlException) {
+                                    FacesContext.getCurrentInstance()
+                    .addMessage(null,
+                            new FacesMessage(FacesMessage.SEVERITY_INFO,
+                                    "Felicidades, el registro se ha realizado correctamente", ""));
+        } catch (Exception e) {
             if (null != sessionObj.getTransaction()) {
+             FacesContext.getCurrentInstance()
+                    .addMessage(null,
+                            new FacesMessage(FacesMessage.SEVERITY_INFO,
+                                    "Ese correo ya esta registrado", ""));
                 System.out.println("\n.......Transaction Is Being Rolled Back.......");
                 sessionObj.getTransaction().rollback();
             }
-            sqlException.printStackTrace();
         } finally {
             if (sessionObj != null) {
                 sessionObj.close();

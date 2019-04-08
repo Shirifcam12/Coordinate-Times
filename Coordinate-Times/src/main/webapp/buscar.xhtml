@@ -5,9 +5,51 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <style>
+  .fakeimg {
+    height: 150px;
+    background: #aaa;
+  }
+  </style>
         <title>Buscar</title>
     </h:head>
     <h:body>
+         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+                <form class="form-inline my-2 my-lg-0" action="principal.xhtml?faces-redirect=true">
+                <button class="btn btn-outline-success" type="submit">Principal</button>
+  	        </form>
+	  	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    		<span class="navbar-toggler-icon"></span>
+  		</button>
+  		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+  	  		<ul class="navbar-nav mr-auto">
+      			<li class="nav-item">
+        			<a class="nav-link" href="#">Link</a>
+      			</li>
+      			<li class="nav-item">
+        			<a class="nav-link" href="#">Link</a>
+    	  		</li>
+      			<li class="nav-item">
+        			<a class="nav-link" href="#">Link</a>
+	      		</li> 
+    		</ul>
+    		<form class="form-inline my-2 my-lg-0" action="buscar.xhtml?faces-redirect=true">
+    			<button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
+  			</form>
+                    <form class ="form-inline my-2 my-lg-0" action="registro.xhtml?faces-redirect=true">
+  			<button class="btn btn-success my-2 my-sm-0" type="submit">Registrarse</button>
+                        </form>
+                    <form class ="form-inline my-2 my-lg-0" action="inicio-sesion.xhtml?faces-redirect=true">
+  			<button class="btn btn-success my-2 my-sm-0" type="submit">Iniciar Sesión</button>
+                        </form>
+  		</div>  
+	</nav>
         <h1></h1> <br/>
         <h:form id="myForm">
             <table>
@@ -20,6 +62,13 @@
                     <td>Buscar</td>
                     <td><p:inputText type="search" value="#{buscarPorTema.nombre}"/>
 			<p:commandButton action="#{buscarPorTema.buscarTema()}" value="BuscarTema"/></td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td>Buscar</td>
+                    <td><p:inputText type="search" value="#{buscarPorPerfil.correo}"/>
+			<p:commandButton action="#{buscarPorPerfil.buscarPerfil()}" value="BuscarPerfil"/></td>
                 </tr>
             </table>
         </h:form>

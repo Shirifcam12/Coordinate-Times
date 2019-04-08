@@ -23,7 +23,7 @@ import modelo.UtilityU;
 @ManagedBean
 @SessionScoped
 public class UsuarioBean {
-    private Usuario usuario=new Usuario();
+    private Usuario usuario = new Usuario();
     static Usuario usuarioelimina = new Usuario();
     static Usuario usuario1;
 
@@ -35,8 +35,7 @@ public class UsuarioBean {
         this.usuario = usuario;
     }
 
-    public String verificaDatos() throws Exception{
-        
+    public String verificaDatos() throws Exception{ 
         UtilityU usUT=new UtilityU();
         String resultado;
         try{
@@ -47,6 +46,7 @@ public class UsuarioBean {
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario",usuario);
             resultado="exito";
         }else{
+            usuario = new Usuario();
             resultado="error";
         }
         }catch(Exception e){

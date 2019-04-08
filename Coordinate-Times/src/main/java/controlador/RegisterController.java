@@ -30,12 +30,7 @@ public class RegisterController {
                 .getViewRoot()
                 .setLocale(new Locale("es-Mx"));
     }
-
     public String addUser() {
-            FacesContext.getCurrentInstance()
-                    .addMessage(null,
-                            new FacesMessage(FacesMessage.SEVERITY_INFO,
-                                    "Felicidades, el registro se ha realizado correctamente", ""));
             user.setTipo(1);
             u.save(user);
             user = null;

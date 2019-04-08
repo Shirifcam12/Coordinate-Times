@@ -9,19 +9,27 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css" type="text/css"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
   <style>
   .fakeimg {
     height: 150px;
     background: #aaa;
   }
-  </style>
+   .map {
+        height: 700px;
+        width: 100%;
+    }
+    </style>
  </head>
  <body>
  	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  		<a class="navbar-brand" href="#">Navbar</a>
+                <form class="form-inline my-2 my-lg-0" action="principal.xhtml?faces-redirect=true">
+                <button class="btn btn-outline-success" type="submit">Principal</button>
+  	        </form>
 	  	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     		<span class="navbar-toggler-icon"></span>
   		</button>
@@ -37,15 +45,32 @@
         			<a class="nav-link" href="#">Link</a>
 	      		</li>    
     		</ul>
-    		<form class="form-inline my-2 my-lg-0" action="/action_page.php">
-    			<input class="form-control mr-sm-2" type="text" placeholder="Search"/>
-    			<button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+    		<form class="form-inline my-2 my-lg-0" action="buscar.xhtml?faces-redirect=true">
+    			<button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
   			</form>
-  			<button class="btn btn-success my-2 my-sm-0" type="submit">Log In</button>
-  			<button class="btn btn-success my-2 my-sm-0" type="submit">Sign In</button>
+                    <form class ="form-inline my-2 my-lg-0" action="registro.xhtml?faces-redirect=true">
+  			<button class="btn btn-success my-2 my-sm-0" type="submit">Registrarse</button>
+                        </form>
+                    <form class ="form-inline my-2 my-lg-0" action="inicio-sesion.xhtml?faces-redirect=true">
+  			<button class="btn btn-success my-2 my-sm-0" type="submit">Iniciar Sesión</button>
+                        </form>
   		</div>  
 	</nav>
      <h1>Coordinate Times</h1>
-
+     <div id="map" class="map"></div>
+    <script type="text/javascript">
+      var map = new ol.Map({
+        target: 'map',
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          })
+        ],
+        view: new ol.View({
+          center: ol.proj.fromLonLat([255, 23]),
+          zoom: 5
+        })
+      });
+    </script>
 </body>
 </html>
