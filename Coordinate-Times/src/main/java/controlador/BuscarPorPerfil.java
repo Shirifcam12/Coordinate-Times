@@ -58,7 +58,7 @@ public class BuscarPorPerfil {
         if(us.isEmpty()){
         return "noresultado?faces-redirect=true";
         }else{
-        return "resultadop?faces-redirect=true";
+        return "perfil?faces-redirect=true";
         }
         
     }

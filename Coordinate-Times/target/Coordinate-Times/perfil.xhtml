@@ -18,7 +18,7 @@
  </h:head>
  <h:body>
     <h1> Perfil </h1>
-    <p>datos bla bla</p>
+    <p>Nombre del perfil: <output value="#{BuscarPorPerfil.getUS().get(0).nombre}"></output>></p>
 </h:body>
          <h:panelGrid columns="1" cellpadding="5">
              <p:commandButton value="Eliminar permisos de Informador" type="button" action="#{perfilC.eliminaPerfil()}" onclick="PF('dlg2').show();" /> 

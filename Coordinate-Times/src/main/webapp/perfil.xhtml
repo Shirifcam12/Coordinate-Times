@@ -9,6 +9,14 @@
  <f:view>
  <h:head>
   <title>Coordinate Times</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css" type="text/css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
   <style>
   .fakeimg {
     height: 150px;
@@ -17,8 +25,43 @@
   </style>
  </h:head>
  <h:body>
-    <h1> Perfil </h1>
-    <p>datos bla bla</p>
+ 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+                <form class="form-inline my-2 my-lg-0" action="principal.xhtml?faces-redirect=true">
+                <button class="btn btn-outline-success" type="submit">Principal</button>
+  	        </form>
+	  	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    		<span class="navbar-toggler-icon"></span>
+  		</button>
+  		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+  	  		<ul class="navbar-nav mr-auto">
+      			<li class="nav-item">
+        			<a class="nav-link" href="#">Link</a>
+      			</li>
+      			<li class="nav-item">
+        			<a class="nav-link" href="#">Link</a>
+    	  		</li>
+      			<li class="nav-item">
+        			<a class="nav-link" href="#">Link</a>
+	      		</li>    
+    		</ul>
+    		<form class="form-inline my-2 my-lg-0" action="buscar.xhtml?faces-redirect=true">
+    			<button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
+  			</form>
+                    <form class ="form-inline my-2 my-lg-0" action="registro.xhtml?faces-redirect=true">
+  			<button class="btn btn-success my-2 my-sm-0" type="submit">Registrarse</button>
+                        </form>
+                    <form class ="form-inline my-2 my-lg-0" action="inicio-sesion.xhtml?faces-redirect=true">
+  			<button class="btn btn-success my-2 my-sm-0" type="submit">Iniciar Sesión</button>
+                        </form>
+  		</div>  
+	</nav>
+ 	<form>
+    	<h1> Perfil </h1>
+    	<p> Nombre del perfil: <output value="#{BuscarPorPerfil.getUS().get(0).nombre}"></output> <br></br>
+    	Correo: <output value="#{BuscarPorPerfil.getUS().get(0).correo}"></output> <br></br>
+    	Tipo: <output value="#{BuscarPorPerfil.getUS().get(0).tipo}"></output> 
+    	</p>
+	</form>
 </h:body>
          <h:panelGrid columns="1" cellpadding="5">
              <p:commandButton value="Eliminar permisos de Informador" type="button" action="#{perfilC.eliminaPerfil()}" onclick="PF('dlg2').show();" /> 
