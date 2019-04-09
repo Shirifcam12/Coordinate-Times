@@ -55,18 +55,25 @@
                         </form>
   		</div>  
 	</nav>
- 	<form>
+ 	<h:form>
     	<h1> Perfil </h1>
     	<p> Nombre del perfil: <output value="#{BuscarPorPerfil.getUS().get(0).nombre}"></output> <br></br>
     	Correo: <output value="#{BuscarPorPerfil.getUS().get(0).correo}"></output> <br></br>
     	Tipo: <output value="#{BuscarPorPerfil.getUS().get(0).tipo}"></output> 
     	</p>
-	</form>
-</h:body>
-         <h:panelGrid columns="1" cellpadding="5">
-             <p:commandButton value="Eliminar permisos de Informador" type="button" action="#{perfilC.eliminaPerfil()}" onclick="PF('dlg2').show();" /> 
-                <p:commandButton value="Eliminar permisos de Comentarista" type="button" action="#{perfilC.eliminaPerfil()}" onclick="PF('dlg2').show();"/>    
-             
-              </h:panelGrid> 
-</f:view>
+      <table>
+                <tr><td>
+                        <p:messages id="messages" autoUpdate="true" closable="true" />
+                    </td></tr>
+            </table>
+            <table>
+                <tr>
+                    
+                    <td>
+      <p:commandButton action="#{perfilC.eliminaPerfil()}" value="EliminarPerfil"/></td>
+                </tr>
+            </table>
+	</h:form>
+  </h:body>
+  </f:view>
 </html>
