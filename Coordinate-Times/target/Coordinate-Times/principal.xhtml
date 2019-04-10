@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
- <head>
+ <h:head>
   <title>Coordinate Times</title>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -19,13 +19,17 @@
         height: 700px;
         width: 100%;
     }
-    </style>
- </head>
- <body>
- 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-                <form class="form-inline my-2 my-lg-0" action="principal.xhtml?faces-redirect=true">
-                <button class="btn btn-outline-success" type="submit">Principal</button>
-  	        </form>
+    .fakeimg {
+    height: 150px;
+    background: #aaa;
+  }
+ </style>
+ </h:head>
+ <h:body>
+ 	 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  		<h:form class="form-inline my-2 my-lg-0" >
+                    <p:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="principal.xhtml?faces-redirect=true" value = "Principal"></p:commandButton>
+  	        </h:form>
 	  	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     		<span class="navbar-toggler-icon"></span>
   		</button>
@@ -41,15 +45,15 @@
         			<a class="nav-link" href="#">Link</a>
 	      		</li>    
     		</ul>
-    		<form class="form-inline my-2 my-lg-0" action="buscar.xhtml?faces-redirect=true">
-    			<button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
-  			</form>
-                    <form class ="form-inline my-2 my-lg-0" action="registro.xhtml?faces-redirect=true">
-  			<button class="btn btn-success my-2 my-sm-0" type="submit">Registrarse</button>
-                        </form>
-                    <form class ="form-inline my-2 my-lg-0" action="inicio-sesion.xhtml?faces-redirect=true">
-  			<button class="btn btn-success my-2 my-sm-0" type="submit">Iniciar Sesión</button>
-                        </form>
+    		<h:form class="form-inline my-2 my-lg-0" >
+    			<p:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="buscar.xhtml?faces-redirect=true" value= "Buscar" ></p:commandButton>
+  			</h:form>
+                    <h:form class ="form-inline my-2 my-lg-0">
+  			<p:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="registro.xhtml?faces-redirect=true" value="Registrarse"></p:commandButton>
+                        </h:form>
+                    <h:form class ="form-inline my-2 my-lg-0">
+  			<p:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="inicio-sesion.xhtml?faces-redirect=true" value="Iniciar Sesión"></p:commandButton>
+                        </h:form>
   		</div>  
 	</nav>
      <h1>Coordinate Times</h1>
@@ -68,5 +72,5 @@
         })
       });
     </script>
-</body>
+</h:body>
 </html>

@@ -26,9 +26,9 @@
  </h:head>
  <h:body>
  	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-                <form class="form-inline my-2 my-lg-0" action="principal.xhtml?faces-redirect=true">
-                <button class="btn btn-outline-success" type="submit">Principal</button>
-  	        </form>
+  		<h:form class="form-inline my-2 my-lg-0" >
+                    <p:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="principal.xhtml?faces-redirect=true" value = "Principal"></p:commandButton>
+  	        </h:form>
 	  	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     		<span class="navbar-toggler-icon"></span>
   		</button>
@@ -44,34 +44,27 @@
         			<a class="nav-link" href="#">Link</a>
 	      		</li>    
     		</ul>
-    		<form class="form-inline my-2 my-lg-0" action="buscar.xhtml?faces-redirect=true">
-    			<button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
-  			</form>
-                    <form class ="form-inline my-2 my-lg-0" action="registro.xhtml?faces-redirect=true">
-  			<button class="btn btn-success my-2 my-sm-0" type="submit">Registrarse</button>
-                        </form>
-                    <form class ="form-inline my-2 my-lg-0" action="inicio-sesion.xhtml?faces-redirect=true">
-  			<button class="btn btn-success my-2 my-sm-0" type="submit">Iniciar Sesión</button>
-                        </form>
+    		<h:form class="form-inline my-2 my-lg-0" >
+    			<p:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="buscar.xhtml?faces-redirect=true" value= "Buscar" ></p:commandButton>
+  			</h:form>
+                    <h:form class ="form-inline my-2 my-lg-0">
+  			<p:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="registro.xhtml?faces-redirect=true" value="Registrarse"></p:commandButton>
+                        </h:form>
+                    <h:form class ="form-inline my-2 my-lg-0">
+  			<p:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="inicio-sesion.xhtml?faces-redirect=true" value="Iniciar Sesión"></p:commandButton>
+                        </h:form>
   		</div>  
 	</nav>
  	<h:form>
     	<h1> Perfil </h1>
-    	<p> Nombre del perfil: <output value="#{BuscarPorPerfil.getUS().get(0).nombre}"></output> <br></br>
-    	Correo: <output value="#{BuscarPorPerfil.getUS().get(0).correo}"></output> <br></br>
-    	Tipo: <output value="#{BuscarPorPerfil.getUS().get(0).tipo}"></output> 
+        <p> Nombre del perfil: <h:outputText value="#{buscarPorPerfil.getUs().get(0).getNombre()}"></h:outputText>> <br></br>
+            Correo: <h:outputText value="#{buscarPorPerfil.getUs().get(0).getCorreo()}"></h:outputText> <br></br>
+            Tipo: <h:outputText value="#{buscarPorPerfil.getUs().get(0).getTipo()}"></h:outputText> 
     	</p>
       <table>
                 <tr><td>
                         <p:messages id="messages" autoUpdate="true" closable="true" />
                     </td></tr>
-            </table>
-            <table>
-                <tr>
-                    
-                    <td>
-      <p:commandButton action="#{perfilC.eliminaPerfil()}" value="EliminarPerfil"/></td>
-                </tr>
             </table>
 	</h:form>
   </h:body>

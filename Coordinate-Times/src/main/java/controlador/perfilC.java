@@ -35,7 +35,7 @@ public class perfilC{
 		}else{
                  if(condicion.getCorreo()==(BuscarPorPerfil.getUs().get(0)).getCorreo()){
                  FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "No puedes eliminarte a ti mismo", ""));        
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "No puedes eliminarte a ti mismo", ""));        
                 }else{
 			FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha eliminado correctamenten el perfil", ""));

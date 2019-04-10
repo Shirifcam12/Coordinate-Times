@@ -19,6 +19,7 @@ public class BuscarPorPerfil {
     private UtilityT u = new UtilityT();
 
     public static ArrayList<Usuario> getUs() {
+        System.out.println(us);
         return us;
     }
 
@@ -56,9 +57,26 @@ public class BuscarPorPerfil {
             return "";
         }
         if(us.isEmpty()){
-        return "noresultado?faces-redirect=true";
+                FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "No se encontro el Perfil", ""));
+        return null;
         }else{
         return "perfil?faces-redirect=true";
+        }
+        
+    }
+    public String buscarPerfil1() {
+        
+        us= u.buscarPerfil(correo);
+        if(correo == "" ){
+            return "";
+        }
+        if(us.isEmpty()){
+                FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "No se encontro el Perfil", ""));
+        return null;
+        }else{
+        return "perfilb?faces-redirect=true";
         }
         
     }

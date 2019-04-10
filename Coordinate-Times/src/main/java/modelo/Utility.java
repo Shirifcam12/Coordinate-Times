@@ -26,7 +26,7 @@ public class Utility {
             if (null != sessionObj.getTransaction()) {
              FacesContext.getCurrentInstance()
                     .addMessage(null,
-                            new FacesMessage(FacesMessage.SEVERITY_INFO,
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR,
                                     "Ese correo ya esta registrado", ""));
                 System.out.println("\n.......Transaction Is Being Rolled Back.......");
                 sessionObj.getTransaction().rollback();

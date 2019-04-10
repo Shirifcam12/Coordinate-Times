@@ -78,9 +78,13 @@ public class MostrarMarcador {
                 .setLocale(new Locale("es-Mx"));
     }
 
-    public String mostrarMarc() {
-        t = u.MostrarMarcadores(nombre);
-        return "mostrar?faces-redirect=true";
+    public String mostrarMarc(String tema){
+        t = u.MostrarMarcadores(tema);
+        return "resultado?faces-redirect=true";
+    }
+    public String mostrarMarc1(String tema){
+        t = u.MostrarMarcadores(tema);
+        return "resultado1?faces-redirect=true";
     }
  }
 

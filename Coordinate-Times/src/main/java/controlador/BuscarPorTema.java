@@ -56,9 +56,26 @@ public class BuscarPorTema {
             return "";
         }
         if(t.isEmpty()){
-        return "noresultado?faces-redirect=true";
+        FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "No se encontro el tema", ""));
+        return null;
         }else{
         return "resultado?faces-redirect=true";
+        }
+        
+    }
+    public String buscarTema1() {
+        
+        t = u.buscarTema(nombre);
+        if(nombre == "" ){
+            return "";
+        }
+        if(t.isEmpty()){
+        FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "No se encontro el tema", ""));
+        return null;
+        }else{
+        return "resultado1?faces-redirect=true";
         }
         
     }

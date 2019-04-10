@@ -47,7 +47,9 @@ public class UsuarioBean {
             resultado="exito";
         }else{
             usuario = new Usuario();
-            resultado="error";
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Datos Incorrectos", ""));
+            resultado=null;
         }
         }catch(Exception e){
             throw e;
@@ -79,11 +81,9 @@ public class UsuarioBean {
         }
         return estado;  
     }
-    
 public String cerrarSesion(){
-    
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "inicio-sesion?faces-redirect=true";
+        return "principal.xhtml?faces-redirect=true";
 }
 }    
 

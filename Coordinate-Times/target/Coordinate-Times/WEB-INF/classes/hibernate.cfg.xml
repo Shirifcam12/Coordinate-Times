@@ -16,5 +16,6 @@
     <mapping class="modelo.Usuario"/>
     <mapping class="modelo.Tema" file="" jar="" package="" resource=""/>
     <mapping class="modelo.Marcador"/>
+    <mapping class="modelo.Comentario"/>
   </session-factory>
 </hibernate-configuration>
