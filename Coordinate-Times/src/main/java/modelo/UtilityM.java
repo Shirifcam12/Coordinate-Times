@@ -10,13 +10,17 @@ import org.hibernate.Session;
 
 
 /**
- *
- * @author ricardo
+ * Clase que nos ayuda a mostrar los marcadores
+ * @author Luna Menguante
  */
 public class UtilityM {
      static Tema temaObj;
      static Session sessionObj;
-    
+ /**
+  * Método que obtiene los marcadores asociados a un tema dado
+  * @param tema- el tema del cual buscamos los marcadores
+  * @return un Arraylist con los marcadores asociados al tema que se busque
+  */
 public ArrayList<Marcador> MostrarMarcadores(String tema){ 
     Query query = HibernateUtil.getCurrentSession().createQuery("FROM Marcador m WHERE m.idTema = (SELECT idT FROM Tema c WHERE c.nombre = :tema)");
     query.setParameter("tema", tema);

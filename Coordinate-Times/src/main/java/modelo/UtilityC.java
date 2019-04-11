@@ -10,12 +10,17 @@ import org.hibernate.Session;
 
 
 /**
- *
- * @author ricardo
+ * Clase que nos ayuda a mostrar los comentarios 
+ * @author Luna Menguante
  */
 public class UtilityC {
     static Marcador marcadorObj;
     static Session sessionObj;
+    /**
+     * Método que nos ayuda a obtener los comentarios almacenados en la base de datos dado un id
+     * @param id- el id que nos ayuda a buscar en la base
+     * @return un Arraylist con los comentarios de la base dado el id 
+     */
 public ArrayList<Comentario> mostrarComentarios(int id){ 
     Query query = HibernateUtil.getCurrentSession().createQuery("FROM Comentario c WHERE c.idMarcador = :id");
     query.setParameter("id", id);

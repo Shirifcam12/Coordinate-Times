@@ -9,14 +9,20 @@ package modelo;
 import java.util.ArrayList;
 import org.hibernate.Query;
 import org.hibernate.Session;
+
 /**
- *
- * @author ricardo
+ * Clase que nos ayuda a verificar los datos al momento de iniciar sesión
+ * @author Luna Menguante
  */
 public class UtilityU {
     static  Usuario usObj;
     static Session sessionObj;
-    
+ /**
+  * Método que se encarga de verificar los datos provistos en el inicio de sesion 
+  * @param usuario- el usuario provisto en el inicio de sesion
+  * @return un usuario si los datos han sido verificados 
+  * @throws Exception si los datos no se han podido verificar
+  */   
 public Usuario verificaDatos(Usuario usuario)throws Exception   { 
     Usuario us=null;
     try{

@@ -7,7 +7,7 @@ import org.hibernate.cfg.Configuration;
  * Hibernate Utility class with a convenient method to get Session Factory
  * object.
  *
- * @author ricardo
+ * @author Luna Menguante
  */
 public class HibernateUtil {
 
@@ -25,20 +25,23 @@ public class HibernateUtil {
             throw new ExceptionInInitializerError(ex);
         }
     }
-
+/**
+ * Metodo que devuelve la SessionFactory dada por Hibernate
+ * @return la SessionFactory dada por Hibernate
+ */
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
      /**
-   * Abre una nueva sesión
+   * Método que abre una nueva sesión
    */
   public static void openSession() {
     session = sessionFactory.openSession();
   }
  
   /**
-   * Devuelve la sesión actual
-   * @return
+   * Método que devuelve la sesión actual
+   * @return la sesión actual
    */
   public static Session getCurrentSession() {
  
@@ -49,7 +52,7 @@ public class HibernateUtil {
   }
  
   /**
-   * Cierra Hibernate
+   * Método que cierra Hibernate
    */
   public static void closeSessionFactory() {
  

@@ -4,14 +4,17 @@ import javax.faces.context.FacesContext;
 import org.hibernate.Session;
 
 /**
- *
- * @author ricardo
+ * Clase que nos ayuda a guardar usuarios en la base de datos
+ * @author Luna Menguante
  */
 public class Utility {
 
     static Usuario userObj;
     static Session sessionObj;
-
+/**
+ * Método que guarda un usuario en la base de datos
+ * @param usuario el usuario a agregar
+ */
     public void save(Usuario usuario) {
         try {
             sessionObj = HibernateUtil.getSessionFactory().openSession();
