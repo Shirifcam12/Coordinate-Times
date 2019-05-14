@@ -1,0 +1,8 @@
+0:0:0:0:0:0:0:1 - - [13/May/2019:22:53:08 -0500] "GET /Coordinate-Times/regist-inf.xhtml HTTP/1.1" 200 7177 http-bio-8080-exec-1 293
+0:0:0:0:0:0:0:1 - - [13/May/2019:22:53:08 -0500] "GET /Coordinate-Times/javax.faces.resource/core.js.xhtml?ln=primefaces&v=6.0 HTTP/1.1" 304 - http-bio-8080-exec-6 9
+0:0:0:0:0:0:0:1 - - [13/May/2019:22:53:08 -0500] "GET /Coordinate-Times/javax.faces.resource/components.css.xhtml?ln=primefaces&v=6.0 HTTP/1.1" 304 - http-bio-8080-exec-2 51
+0:0:0:0:0:0:0:1 - - [13/May/2019:22:53:08 -0500] "GET /Coordinate-Times/javax.faces.resource/jquery/jquery-plugins.js.xhtml?ln=primefaces&v=6.0 HTTP/1.1" 304 - http-bio-8080-exec-5 11
+0:0:0:0:0:0:0:1 - - [13/May/2019:22:53:08 -0500] "GET /Coordinate-Times/javax.faces.resource/theme.css.xhtml?ln=primefaces-aristo HTTP/1.1" 304 - http-bio-8080-exec-3 50
+0:0:0:0:0:0:0:1 - - [13/May/2019:22:53:08 -0500] "GET /Coordinate-Times/javax.faces.resource/jquery/jquery.js.xhtml?ln=primefaces&v=6.0 HTTP/1.1" 304 - http-bio-8080-exec-4 19
+0:0:0:0:0:0:0:1 - - [13/May/2019:22:53:08 -0500] "GET /Coordinate-Times/javax.faces.resource/components.js.xhtml?ln=primefaces&v=6.0 HTTP/1.1" 304 - http-bio-8080-exec-7 23
+0:0:0:0:0:0:0:1 - - [13/May/2019:22:53:14 -0500] "POST /Coordinate-Times/regist-inf.xhtml HTTP/1.1" 200 221 http-bio-8080-exec-7 93
