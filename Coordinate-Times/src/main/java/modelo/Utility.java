@@ -1,6 +1,10 @@
 package modelo;
+import java.util.ArrayList;
+import java.util.Arrays;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 /**
@@ -10,33 +14,75 @@ import org.hibernate.Session;
 public class Utility {
 
     static Usuario userObj;
-    static Session sessionObj;
+    static Session session;
 /**
  * Método que guarda un usuario en la base de datos
  * @param usuario el usuario a agregar
  */
-    public void save(Usuario usuario) {
+
+    public Usuario obtenUsuario(String nombre, String password) {
         try {
-            sessionObj = HibernateUtil.getSessionFactory().openSession();
-            sessionObj.beginTransaction();
-            sessionObj.save(usuario);
-            sessionObj.getTransaction().commit();
-                                    FacesContext.getCurrentInstance()
-                    .addMessage(null,
-                            new FacesMessage(FacesMessage.SEVERITY_INFO,
-                                    "Felicidades, el registro se ha realizado correctamente", ""));
-        } catch (Exception e) {
-            if (null != sessionObj.getTransaction()) {
-             FacesContext.getCurrentInstance()
-                    .addMessage(null,
-                            new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                                    "Ese correo ya esta registrado", ""));
-                System.out.println("\n.......Transaction Is Being Rolled Back.......");
-                sessionObj.getTransaction().rollback();
-            }
+            session = HibernateUtil.getSessionFactory().openSession();
+            Query query = session.getNamedQuery("Usuario.findByNombrePassword");
+            query.setParameter("nombre", nombre).setParameter("password", password);
+            Usuario usuario = (Usuario) query.uniqueResult();
+            return usuario;
         } finally {
-            if (sessionObj != null) {
-                sessionObj.close();
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
+
+    public void guardaUsuario(Usuario usuario) {
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            // Le asignamos el rol de usuario
+            usuario.setTipo(1);
+            session.save(usuario);
+            session.getTransaction().commit();
+        } catch (HibernateException ex) {
+            if (null != session.getTransaction()) {
+                System.out.println("\n.......Transaction Is Being Rolled Back.......");
+                session.getTransaction().rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
+    public void actualizaUsuario(Usuario usuario) {
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.update(usuario);
+            session.getTransaction().commit();
+        } catch (HibernateException ex) {
+            if (null != session.getTransaction()) {
+                System.out.println("\n.......Transaction Is Being Rolled Back.......");
+                session.getTransaction().rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
+
+    public Usuario obtenUsuario(String hash) {
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            Query query = session.getNamedQuery("Usuario.findByHash");
+            query.setParameter("hash", hash);
+            Usuario usuario = (Usuario) query.uniqueResult();
+            return usuario;
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
             }
         }
     }

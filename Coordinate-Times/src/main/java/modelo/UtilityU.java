@@ -28,7 +28,7 @@ public Usuario verificaDatos(Usuario usuario)throws Exception   {
     try{
         sessionObj=HibernateUtil.getCurrentSession();
         String pquery="FROM Usuario WHERE correo= '"+usuario.getCorreo()+"'"
-                + "and contraseña= '"+usuario.getContrasena()+"'";
+                + "and contraseña= '"+usuario.getContraseña()+"'";
         Query query=sessionObj.createQuery(pquery);
         if(!query.list().isEmpty()){
             us=(Usuario)query.list().get(0);

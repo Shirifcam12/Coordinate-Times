@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 /**
@@ -15,6 +17,10 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(catalog = "base", schema = "Base", name = "usuario")
+@NamedNativeQueries({
+    @NamedNativeQuery(name = "Usuario.findByNombrePassword",
+            query = "select * from mapita.obten_usuario(:nombre, :password)",
+            resultClass = Usuario.class)})
 public class Usuario {
 
     @Id
@@ -26,7 +32,7 @@ public class Usuario {
     @Column(name = "nombreusuario")
     private String nombre;
 
-    @Column(name = "contraseña")
+    @Column(name = "contrasena")
     private String contraseña;
 
     @Column(name = "correo")
@@ -34,6 +40,15 @@ public class Usuario {
     
     @Column(name = "tipo")
     private int tipo;
+    
+    @Column(name="fotografia")
+    private byte[] fotografia;
+    
+    @Column(name = "activo")
+    private boolean activo;
+    
+    @Column(name = "activacion")
+    private String activacion;
 
 /**
  * Método que devuelve el id asociado al usuario guardado en el bean
@@ -77,20 +92,6 @@ public class Usuario {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-/**
- * Método que devuelve la contraseña del usuario guardado en el bean
- * @return la contraseña del usuario guardado en el bean
- */
-    public String getContrasena() {
-        return contraseña;
-    }
- /**
- * Método que asigna la contraseña del usuario a guardar en el bean
- * @param contrasena-la contraseña del usuario a guardar en el bean
- */
-    public void setContrasena(String contrasena) {
-        this.contraseña = contrasena;
-    }
  /**
  * Método que devuelve el tipo del usuario guardado en el bean
  * @return el tipo del usuario guardado en el bean
@@ -118,4 +119,38 @@ public class Usuario {
             return false;
         }
     }
+
+    public byte[] getFotografia() {
+        return fotografia;
+    }
+
+    public void setFotografia(byte[] fotografia) {
+        this.fotografia = fotografia;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+    public String getActivacion() {
+        return activacion;
+    }
+
+    public void setActivacion(String activacion) {
+        this.activacion = activacion;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+    
+    
 }

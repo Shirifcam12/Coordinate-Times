@@ -51,7 +51,7 @@
   		</div>  
 	</nav>
         <h1>Registrarse</h1> <br/>
-        <h:form id="myForm">
+        <h:form id="registroForm" enctype="multipart/form-data">
             <table>
                 <tr><td>
                         <p:messages id="messages" autoUpdate="true" closable="true" />
@@ -74,23 +74,55 @@
                 </tr>
                 <tr>
                     <td>Contraseña</td>
-                    <td><p:password value="#{registerController.user.contrasena}"
-                                    required="true"
-                                    feedback="true"
-                                    id="Password"/></td>
+                    <td><p:password value="#{registerController.user.contraseña}"
+                          required="true"
+                          feedback="true"
+                          id="Password"
+                          match="ConfirmPassword"
+                          placeholder="Contraseña"
+                          label="Contraseña"
+                          promptLabel="Ingresa una contraseña"
+                          weakLabel="Débil"
+                          goodLabel="Buena"
+                          strongLabel="Fuerte"
+                          inline="true"/></td>
+                </tr>
+                <tr>
+                    <td>ConfirmaContraseña</td>
+                    <td><p:password value="#{registerController.confirmacionPassword}"
+                          required="true"
+                          feedback="true"
+                          inline="true"
+                          id="ConfirmPassword"
+                          placeholder="Confirmar contraseña"
+                          label="Confirmar contraseña"
+                          validatorMessage="Las contraseñas no coinciden"
+                          promptLabel="Ingresa una contraseña"
+                          weakLabel="Débil"
+                          goodLabel="Buena"
+                          strongLabel="Fuerte"/></td>
+                </tr>
+                <tr>
+                    <td>Fotografia</td>
+                    <td><p:fileUpload value="#{registerController.fotografia}"
+                            mode="simple"
+                            skinSimple="true"
+                            fileUploadListener="#{registerController.fileUploadListener}"/></td>
                 </tr>
                 <tr>
                     <td colspan="2" align="center">
                         <p:commandButton action="#{registerController.addUser}"
-                                         value="Registrar"/>
+                                         value="Registrar"
+                                         ajax="false"/>
                         <p:commandButton value="Reset"
-                                         update="myForm"
+                                         update="registroForm"
                                          process="@this">
-                            <p:resetInput target="myForm" />
+                            <p:resetInput target= "registroForm" />
                         </p:commandButton>
                     </td>
                 </tr>
             </table>
+            <p:growl id="growl" showDetail="true" autoUpdate="true"/>
         </h:form>
         
     </h:body>
