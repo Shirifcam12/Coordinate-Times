@@ -1,18 +1,56 @@
+drop extension if exists pgcrypto;
+create extension pgcrypto;
+
 DROP SCHEMA IF EXISTS Base CASCADE;
 CREATE SCHEMA Base;
+
+
 CREATE TABLE Base.usuario(
 	idUsuario serial primary key,
 	nombreUsuario text NOT NULL,
-	contraseña text NOT NULL,
+	contrasena text NOT NULL,
 	correo text NOT NULL,
 	tipo text NOT NULL,
+	fotografia bytea,
+  	activo boolean not null default false,
+  	activacion char(32) not null,
 	CONSTRAINT correo unique(correo),
 	CONSTRAINT nombreU unique(nombreUsuario)
+);
+
+
+drop function if exists Base.hash();
+
+create or replace function Base.hash() returns trigger as $$
+  begin
+    if TG_OP = 'INSERT' then
+       if new.activacion is null then
+         new.activacion = MD5(new.nombreUsuario || new.contrasena || new.correo);
+       end if;
+       new.contrasena = crypt(new.contrasena, gen_salt('bf', 8)::text);
+    end if;
+    return new;
+  end;
+$$ language plpgsql;
+
+drop trigger if exists hashpassword on Base.usuario;
+
+create trigger hashpassword
+before insert on Base.usuario
+for each row execute procedure Base.hash();
+
+
+CREATE TABLE Base.color (
+  id serial primary key,
+  nombre text not null,
+  hex_color text unique not null,
+  constraint is_hex_color check (hex_color ~* '^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$')
 );
 
 CREATE TABLE Base.tema(
 	idTema Serial primary key,
 	idUsuario integer NOT NULL,
+	color_id integer NOT NULL references Base.color(id),
 	nombreTema text NOT NULL,
 	CONSTRAINT fk_idUsuario FOREIGN KEY (idUsuario) REFERENCES Base.usuario(idUsuario) ON DELETE CASCADE,
 	CONSTRAINT nombre unique(nombreTema)
@@ -25,7 +63,6 @@ CREATE TABLE Base.marcador(
 	longitud FLOAT NOT NULL,
 	datos_utiles text NOT NULL,
 	descripcion text NOT NULL,
-	color int NOT NULL,
 	CONSTRAINT id_Marcador_pkey unique(idMarcador,idTema),
 	CONSTRAINT fk_idTema FOREIGN KEY (idTema) REFERENCES Base.tema(idTema) ON DELETE CASCADE
 );
@@ -37,7 +74,15 @@ CREATE TABLE Base.comentario(
 	idTema integer not NULL,
 	comentario text NOT NULL,
 	fecha date,
+	gusta integer,
+	nogusta integer,
 	CONSTRAINT id_comentario_pkey unique(idComentario,idMarcador,idTema),
 	CONSTRAINT fk_idComeentario FOREIGN KEY(idMarcador,idTema) REFERENCES Base.marcador(idMarcador,idTema) ON DELETE CASCADE
 );
 	
+insert into Base.color (nombre, hex_color)
+values ('black', '#000000'),
+       ('red', '#FF0000'),
+       ('lime', '#00FF00'),
+       ('blue', '#0000FF'),
+       ('green', '#008000');
