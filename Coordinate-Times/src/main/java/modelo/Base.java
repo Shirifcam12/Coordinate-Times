@@ -57,4 +57,27 @@ public class Base{
             }
         }
     }
+
+    /**
+ * Método que edita la informacion de un usuario de la base de datos
+ * @param usuario el usuario que actualizara sus datos
+ */
+    public void editaU(Usuario usuario){
+        try {
+            sessionObj = HibernateUtil.getSessionFactory().openSession();
+            sessionObj.beginTransaction();
+            sessionObj.update(usuario);
+            sessionObj.getTransaction().commit();
+        } catch (Exception sqlException) {
+            if (null != sessionObj.getTransaction()) {
+                System.out.println("\n.......Transaction Is Being Rolled Back.......");
+                sessionObj.getTransaction().rollback();
+            }
+            sqlException.printStackTrace();
+        } finally {
+            if (sessionObj != null) {
+                sessionObj.close();
+            }
+        }
+    }
 }

@@ -57,7 +57,7 @@ public class perfilC{
     	}
 
         /**
-         * Metodo que se encarga de eliminar tus perfil 
+         * Metodo que se encarga de eliminar tu perfil 
          * @return null si el registro es correcto y un mensaje de error en otro caso
          */
         public String eliminaTuPerfil(){
@@ -85,5 +85,29 @@ public class perfilC{
             }
             return null;
         }
-}
+
+                /**
+         * Metodo que se encarga de eliminar un perfil 
+         * @return null si el registro es correcto y un mensaje de error en otro caso
+         */
+        public String editaPerfil(){
+            Usuario condicion = UsuarioBean.getUsuario1();
+            if(UsuarioBean.getUsuario1() == null){
+                FacesContext.getCurrentInstance().addMessage(null
+                                                         , new FacesMessage(FacesMessage.SEVERITY_ERROR, "Inicia sesion para poder acceder a esta funcion", ""));
+
+            }else{
+                if(condicion.getCorreo()==(BuscarPorPerfil.getUs().get(0)).getCorreo()){
+                    FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha editado correctamenten el perfil", ""));
+                    u.editaU(UsuarioBean.getUsuario1());
+                    usuario = null;
+                }else{
+                    FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "A ocurido un error favor de contactar a un administrador", ""));        
+
+                }
+            }
+            return null;
+        }
 }
