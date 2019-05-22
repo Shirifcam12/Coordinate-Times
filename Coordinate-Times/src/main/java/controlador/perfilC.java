@@ -15,17 +15,63 @@ import modelo.Base;
 @RequestScoped
 public class perfilC{
 
+        private String nombre;
+        private String correo;
+        private String descripcion;
         private Integer usuario;
         private Base u = new Base();
-/**
- * Método constructor de la clase perfilC
- * 
- */
+        /**
+        * Método constructor de la clase perfilC
+        * 
+        */
         public perfilC() {
             FacesContext.getCurrentInstance()
                 .getViewRoot()
                 .setLocale(new Locale("es-Mx"));
         }
+
+        /* Método que devuelve el nombre guardado en el bean
+        * @return El nombre almacenado en el bean
+        */
+        public String getNombre(){
+                return nombre;
+        }
+        /**
+        * Método que asigna el nombre a guardar en el bean
+        * @param nombre el correo a almacenar
+        */
+        public void setNombre(String nombre){
+            this.nombre = nombre;
+        }
+
+        /* Método que devuelve el nombre guardado en el bean
+        * @return El nombre almacenado en el bean
+        */
+        public String getCorreo(){
+                return correo;
+        }
+        /**
+        * Método que asigna el nombre a guardar en el bean
+        * @param nombre el correo a almacenar
+        */
+        public void setCorreo(String correo){
+            this.correo = correo;
+        }
+
+        /* Método que devuelve el nombre guardado en el bean
+        * @return El nombre almacenado en el bean
+        */
+        public String getDescripcion(){
+                return descripcion;
+        }
+        /**
+        * Método que asigna el tipo a guardar en el bean
+        * @param tipo el correo a almacenar
+        */
+        public void setDescripcion(String descripcion){
+            this.descripcion = descripcion;
+        }
+
         /**
          * Metodo que se encarga de eliminar un perfil 
          * @return null si el registro es correcto y un mensaje de error en otro caso
@@ -98,9 +144,11 @@ public class perfilC{
 
             }else{
                 if(condicion.getCorreo()==(BuscarPorPerfil.getUs().get(0)).getCorreo()){
+                    (BuscarPorPerfil.getUs().get(0)).setNombre(nombre);
+                    (BuscarPorPerfil.getUs().get(0)).setCorreo(correo);
                     FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha editado correctamenten el perfil", ""));
-                    u.editaU(UsuarioBean.getUsuario1());
+                    u.editaU(BuscarPorPerfil.getUs().get(0));
                     usuario = null;
                 }else{
                     FacesContext.getCurrentInstance().addMessage(null,

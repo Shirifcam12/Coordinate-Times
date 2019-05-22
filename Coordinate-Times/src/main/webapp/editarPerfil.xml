@@ -57,9 +57,8 @@
 	</nav>
  	<h:form>
     	<h1> Perfil </h1>
-    	<p> Nombre del perfil: <h:input type="text" value="${buscarPorPerfil.getUs().get(0).setNombre()}"></h:input> <br></br>
-    	Correo: <h:input type="text" value="#{buscarPorPerfil.getUs().get(0).setCorreo()}"></h:input> <br></br>
-    	Tipo: <h:input type="text" value="#{buscarPorPerfil.getUs().get(0).setTipo()}"></h:input> 
+    	<p> Nombre del perfil: <h:input type="text" value="#{perfilC.nombre}"></h:input> <br></br>
+    	Correo: <h:input type="text" value="#{perfilC.correo}"></h:input> <br></br> 
     	</p>
       <table>
                 <tr><td>
