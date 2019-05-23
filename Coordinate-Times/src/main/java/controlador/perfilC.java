@@ -16,8 +16,6 @@ import modelo.Base;
 public class perfilC{
 
         private String nombre;
-        private String correo;
-        private String descripcion;
         private Integer usuario;
         private Base u = new Base();
         /**
@@ -42,34 +40,6 @@ public class perfilC{
         */
         public void setNombre(String nombre){
             this.nombre = nombre;
-        }
-
-        /* Método que devuelve el nombre guardado en el bean
-        * @return El nombre almacenado en el bean
-        */
-        public String getCorreo(){
-                return correo;
-        }
-        /**
-        * Método que asigna el nombre a guardar en el bean
-        * @param nombre el correo a almacenar
-        */
-        public void setCorreo(String correo){
-            this.correo = correo;
-        }
-
-        /* Método que devuelve el nombre guardado en el bean
-        * @return El nombre almacenado en el bean
-        */
-        public String getDescripcion(){
-                return descripcion;
-        }
-        /**
-        * Método que asigna el tipo a guardar en el bean
-        * @param tipo el correo a almacenar
-        */
-        public void setDescripcion(String descripcion){
-            this.descripcion = descripcion;
         }
 
         /**
@@ -145,7 +115,6 @@ public class perfilC{
             }else{
                 if(condicion.getCorreo()==(BuscarPorPerfil.getUs().get(0)).getCorreo()){
                     (BuscarPorPerfil.getUs().get(0)).setNombre(nombre);
-                    (BuscarPorPerfil.getUs().get(0)).setCorreo(correo);
                     FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha editado correctamenten el perfil", ""));
                     u.editaU(BuscarPorPerfil.getUs().get(0));

@@ -57,8 +57,7 @@
 	</nav>
  	<h:form>
     	<h1> Perfil </h1>
-    	<p> Nombre del perfil: <h:input type="text" value="#{perfilC.nombre}"></h:input> <br></br>
-    	Correo: <h:input type="text" value="#{perfilC.correo}"></h:input> <br></br> 
+    	<p> Nombre del perfil: <h:input type="text" value="#{perfilC.nombre}"></h:input> <br></br> 
     	</p>
       <table>
                 <tr><td>
