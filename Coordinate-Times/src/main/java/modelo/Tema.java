@@ -5,14 +5,13 @@
  */
 package modelo;
 
-import javax.persistence.Basic;
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 /**
  * Bean manejado que parsea a la base el campo Tema
@@ -20,21 +19,27 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(catalog = "base", schema = "Base", name = "tema")
-public class Tema {
+@NamedQueries(
+        @NamedQuery(name = "Tema.findTemas", query = "SELECT t from Tema t")
+)
+public class Tema implements Serializable {
     @Id
     @Column(name = "idTema")
-    private int idT;
+    private Integer idT;
 
     @Column(name = "idUsuario")
-    private int idU;
-
+    private Integer idU;
+    
+    @Column(name = "color_id")
+    private Integer idC;
+    
     @Column(name = "nombreTema")
     private String nombre;
 /**
  * Método que devuelve el id asociado al tema guardado en el bean
  * @return el id asociado al tema guardado en el bean
  */
-    public int getIdT() {
+    public Integer getIdT() {
         return idT;
     }
 /**
@@ -48,7 +53,7 @@ public class Tema {
  * Método que devuelve el id del usuario asociado al tema guardado en el bean
  * @return el id del usuario asociado al tema guardado en el bean
  */
-    public int getIdU() {
+    public Integer getIdU() {
         return idU;
     }
 /**
@@ -72,4 +77,17 @@ public class Tema {
     public void setnombreT(String nombre){
         this.nombre = nombre;
     }
+
+    public Integer getIdC() {
+        return idC;
+    }
+
+    public void setIdC(int idC) {
+        this.idC = idC;
+    }
+    @Override
+    public String toString() {
+        return nombre;
+    }
+    
 }

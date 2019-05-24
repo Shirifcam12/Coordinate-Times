@@ -39,6 +39,15 @@ create trigger hashpassword
 before insert on Base.usuario
 for each row execute procedure Base.hash();
 
+drop function if exists Base.obten_usuario;
+
+create or replace function Base.obten_usuario(correo text, contraseña text) returns Base.usuario as $$
+  select *
+  from Base.usuario
+  where correo = correo and contrasena = crypt(contraseña, contrasena)
+$$ language sql stable;
+
+
 
 CREATE TABLE Base.color (
   id serial primary key,
@@ -79,6 +88,8 @@ CREATE TABLE Base.comentario(
 	CONSTRAINT id_comentario_pkey unique(idComentario,idMarcador,idTema),
 	CONSTRAINT fk_idComeentario FOREIGN KEY(idMarcador,idTema) REFERENCES Base.marcador(idMarcador,idTema) ON DELETE CASCADE
 );
+insert into Base.usuario(nombreUsuario,contrasena,correo,tipo,activo) values('Shirifcam','contraseñña','shirifcam@gmail.com','0',true);
+
 	
 insert into Base.color (nombre, hex_color)
 values ('black', '#000000'),
@@ -86,3 +97,6 @@ values ('black', '#000000'),
        ('lime', '#00FF00'),
        ('blue', '#0000FF'),
        ('green', '#008000');
+
+insert into Base.tema(idUsuario,color_id,nombreTema) values(1,1,'Hospital');
+insert into base.marcador(idTema,latitud,longitud,datos_utiles,descripcion) values (1,19.322930,-99.221742,'Complicado','Meh');

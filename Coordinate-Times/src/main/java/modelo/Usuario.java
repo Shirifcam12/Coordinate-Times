@@ -18,8 +18,11 @@ import javax.persistence.Transient;
 @Entity
 @Table(catalog = "base", schema = "Base", name = "usuario")
 @NamedNativeQueries({
-    @NamedNativeQuery(name = "Usuario.findByNombrePassword",
-            query = "select * from mapita.obten_usuario(:nombre, :password)",
+    @NamedNativeQuery(name = "Usuario.findByCorreoPassword",
+            query = "select * from Base.obten_usuario(:correo, :contrasena)",
+            resultClass = Usuario.class),
+    @NamedNativeQuery(name = "Usuario.findByHash",
+            query = "select * from Base.usuario where activacion = :hash",
             resultClass = Usuario.class)})
 public class Usuario {
 

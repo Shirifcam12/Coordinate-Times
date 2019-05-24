@@ -5,6 +5,8 @@
  */
 package modelo;
 import java.util.ArrayList;
+import java.util.List;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -16,6 +18,7 @@ import org.hibernate.Session;
 public class UtilityM {
      static Tema temaObj;
      static Session sessionObj;
+     static Session session;
  /**
   * Método que obtiene los marcadores asociados a un tema dado
   * @param tema- el tema del cual buscamos los marcadores
@@ -27,5 +30,34 @@ public ArrayList<Marcador> MostrarMarcadores(String tema){
     ArrayList<Marcador> marcadores = (ArrayList<Marcador>) query.list();
     return marcadores;
 }
+    public List<Marcador> obtenMarcadores() {
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            Query query = session.getNamedQuery("Marcador.findMarcadores");
+            return query.list();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
+    public void guardaMarcador(Marcador m) {
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.save(m);
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            if (null != session.getTransaction()) {
+                System.out.println("\n.......Transaction (Insert marker) Is Being Rolled Back.......");
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
 
 }

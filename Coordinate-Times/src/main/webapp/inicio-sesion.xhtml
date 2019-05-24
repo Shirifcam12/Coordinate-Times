@@ -55,12 +55,12 @@
             <h:messages></h:messages>
             <h:panelGrid columns="2">
                 <h:outputLabel value="Correo" />
-                <h:inputText value="#{usuarioBean.usuario.correo}"/>
+                <h:inputText value="#{usuarioBean.correo}"/>
                 
                 <h:outputLabel value="Contraseña" />
-                <p:password value="#{usuarioBean.usuario.contrasena}"/>
+                <p:password value="#{usuarioBean.contraseña}"/>
             </h:panelGrid>
-            <h:commandButton value="Iniciar Sesión" action="#{usuarioBean.verificaDatos()}"/>
+            <h:commandButton value="Iniciar Sesión" action="#{usuarioBean.login()}"/>
             </h:form>
     </h:body>
 </html>

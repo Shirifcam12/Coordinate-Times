@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package controlador;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Locale;
@@ -13,7 +14,8 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import modelo.Usuario;
-import modelo.UtilityU;
+import modelo.Utility;
+
 
 
 /**
@@ -26,6 +28,10 @@ public class UsuarioBean {
     private Usuario usuario = new Usuario();
     static Usuario usuarioelimina = new Usuario();
     static Usuario usuario1;
+    private String correo;
+    private String contraseña;
+    private final Utility utility = new Utility();
+
 /**
  * Método que devuelve el usuario para el caso de uso inicio-sesión guardado en el bean
  * @return El usuario para el caso de uso inicio-sesión almacenado en el bean
@@ -45,26 +51,26 @@ public class UsuarioBean {
  * @return null si el inicio de sesión es correcto y un mensaje de error en otro caso
  * @throws Exception Error alguna parte del inicio de sesión
  */
-    public String verificaDatos() throws Exception{ 
-        UtilityU usUT=new UtilityU();
-        String resultado;
-        try{
-        usuario=usUT.verificaDatos(this.usuario);
-        if(usuario!=null){
-            usuario1 = usuario;
-            usuarioelimina = usuario;
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario",usuario);
-            resultado="exito";
-        }else{
-            usuario = new Usuario();
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Datos Incorrectos", ""));
-            resultado=null;
+    public String login() throws Exception{ 
+          Usuario u = utility.obtenUsuario(correo, contraseña);
+        if (u != null) {
+            if (!u.isActivo()) {
+                FacesContext.getCurrentInstance()
+                        .addMessage("loginGrowl",
+                                new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                        "Error!", "Verificar correo de validación"));
+            }
+            FacesContext context = FacesContext.getCurrentInstance();
+            usuario1 = u;
+            usuarioelimina = u;
+            context.getExternalContext().getSessionMap().put("usuario", u);
+            return "exito.xhtml?faces-redirect=true";
         }
-        }catch(Exception e){
-            throw e;
-        }
-        return resultado;
+        FacesContext.getCurrentInstance()
+                .addMessage("loginGrowl",
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                "Error!", "Error al iniciar sesión, verificar usuario y/o contraseña"));
+        return "inicio-sesion.xhtml?faces-redirect=true";
     }
 /**
  * Método que devuelve el usuario para el caso de uso elimina usuario guardado en el bean
@@ -111,9 +117,27 @@ public class UsuarioBean {
      * Metodo que se encarga de hacer el cierre de sesión
      * @return el redireccionamiento resultado de la busqueda
      */
-public String cerrarSesion(){
-        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "principal.xhtml?faces-redirect=true";
-}
+    public void logout() throws IOException {
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getExternalContext().invalidateSession();
+        context.getExternalContext().redirect("principal.xhtml?faces-redirect=true");
+        return;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
 }    
 

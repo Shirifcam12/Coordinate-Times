@@ -6,6 +6,7 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -17,7 +18,7 @@ import org.hibernate.Session;
 public class UtilityT {
     static Tema temaObj;
     static Usuario userObj;
-    static Session sessionObj;
+    static Session session;
     private Usuario us = new Usuario();
     private Tema temaoc = new Tema();
     /**
@@ -42,5 +43,16 @@ public class UtilityT {
             ArrayList<Usuario> usuarios = (ArrayList<Usuario>) query.list();
             return usuarios;
         }
+       public List<Tema> obtenTemas() {
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            Query query = session.getNamedQuery("Tema.findTemas");
+            return query.list();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
 	
 }	    

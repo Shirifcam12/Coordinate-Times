@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 /**
@@ -21,6 +23,9 @@ import javax.persistence.Transient;
 @ManagedBean
 @Entity
 @Table(catalog = "base", schema = "Base", name = "marcador")
+@NamedQueries(
+        @NamedQuery(name = "Marcador.findMarcadores", query = "SELECT m FROM Marcador m")
+)
 public class Marcador {
 
     @Id
@@ -31,10 +36,10 @@ public class Marcador {
     private int idTema;
     
     @Column(name = "latitud")
-    private float latitud;
+    private Double latitud;
     
     @Column(name = "longitud")
-    private float longitud;
+    private Double longitud;
     
     @Column(name = "datos_utiles")
     private String datos;
@@ -42,8 +47,6 @@ public class Marcador {
     @Column(name = "descripcion")
     private String descripcion;
     
-    @Column(name = "color")
-    private int color;
 /**
  * Método que devuelve el id asociado al marcador guardado en el bean
  * @return El id del marcador almacenado en el bean
@@ -76,28 +79,28 @@ public class Marcador {
  * Método que devuelve la latitud del marcador guardado en el bean
  * @return La latitud del marcador almacenado en el bean
  */
-    public float getLatitud() {
+    public Double getLatitud() {
         return latitud;
     }
     /**
  * Método que asigna la latitud del marcador a a guardar en el bean
  * @param latitud-la latitud del marcador a guardar en el bean
  */
-    public void setLatitud(float latitud) {
+    public void setLatitud(Double latitud) {
         this.latitud = latitud;
     }
 /**
  * Método que devuelve la longitud del marcador guardado en el bean
  * @return La longitud del marcador almacenado en el bean
  */
-    public float getLongitud() {
+    public Double getLongitud() {
         return longitud;
     }
    /**
  * Método que asigna la longitud del marcador a guardar en el bean
  * @param longitud-la longitud del marcador a guardar en el bean
  */
-    public void setLongitud(float longitud) {
+    public void setLongitud(Double longitud) {
         this.longitud = longitud;
     }
 /**
@@ -127,19 +130,5 @@ public class Marcador {
  */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-/**
- * Método que devuelve el color asociado al marcador guardado en el bean
- * @return el color asociado al marcador guardado en el bean
- */
-    public int getColor() {
-        return color;
-    }
-/**
- * Método que asigna el color asociado al marcador a guardar en el bean
- * @param color-el color asociado al marcador a guardar en el bean
- */
-    public void setColor(int color) {
-        this.color = color;
     }
 }

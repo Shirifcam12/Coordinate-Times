@@ -13,6 +13,4 @@ mvn tomcat7:run
 
 Badillo Macias Ricardo 31400405
 
-Fernández del Valle Diego Marcial 314198039
-
 Salcedo Ramos Carlos Uriel 314189820

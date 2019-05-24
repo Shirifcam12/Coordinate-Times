@@ -20,11 +20,11 @@ public class Utility {
  * @param usuario el usuario a agregar
  */
 
-    public Usuario obtenUsuario(String nombre, String password) {
+    public Usuario obtenUsuario(String correo, String password) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            Query query = session.getNamedQuery("Usuario.findByNombrePassword");
-            query.setParameter("nombre", nombre).setParameter("password", password);
+            Query query = session.getNamedQuery("Usuario.findByCorreoPassword");
+            query.setParameter("correo", correo).setParameter("contrasena", password);
             Usuario usuario = (Usuario) query.uniqueResult();
             return usuario;
         } finally {
