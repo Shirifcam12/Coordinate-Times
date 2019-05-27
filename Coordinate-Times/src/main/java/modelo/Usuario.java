@@ -1,6 +1,7 @@
 package modelo;
 
 import java.io.Serializable;
+import javax.faces.context.FacesContext;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,8 @@ import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import org.primefaces.model.ByteArrayContent;
+import org.primefaces.model.StreamedContent;
 /**
  * Bean manejado que parsea a la base el campo Usuario
  * @author Luna Menguante
@@ -52,6 +55,7 @@ public class Usuario {
     
     @Column(name = "activacion")
     private String activacion;
+    
 
 /**
  * Método que devuelve el id asociado al usuario guardado en el bean
@@ -126,6 +130,13 @@ public class Usuario {
     public byte[] getFotografia() {
         return fotografia;
     }
+    
+    public StreamedContent getImagen(){
+        if (fotografia != null) {
+            return new ByteArrayContent(fotografia);
+        }
+        return null;
+    }
 
     public void setFotografia(byte[] fotografia) {
         this.fotografia = fotografia;
@@ -154,6 +165,4 @@ public class Usuario {
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
-    
-    
 }

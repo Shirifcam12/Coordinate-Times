@@ -1,36 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
-    <f:view>
-        <h:head>
-            <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <style>
-  .fakeimg {
-    height: 150px;
-    background: #aaa;
-  }
-  </style>
-            <title>Resultado</title>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        </h:head>
-        <h:body>
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+    xmlns:b="http://bootsfaces.net/ui">
+<h:head>
+    <title>Coordinate Times</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css" type="text/css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
+  <title></title>
+  <style type="text/css">    
+    .value {
+        font-weight: bold;
+    }
+ 
+     
+ 
+</style>
+</h:head>
+<h:body>
+    <c:choose>
+          <c:when test="#{usuarioBean.estaConectado()}">
+              <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   		<h:form class="form-inline my-2 my-lg-0" >
-                    <p:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="exito.xhtml?faces-redirect=true" value = "Principal"></p:commandButton>
+                    <h:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="principal.xhtml?faces-redirect=true" value = "Principal"></h:commandButton>
   	        </h:form>
 	  	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     		<span class="navbar-toggler-icon"></span>
@@ -47,19 +49,91 @@ and open the template in the editor.
         			<a class="nav-link" href="#">Link</a>
 	      		</li>    
     		</ul>
-    		<h:form class="form-inline my-2 my-lg-0" >
-    			<p:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="buscarp.xhtml?faces-redirect=true" value= "Buscar" ></p:commandButton>
-  			</h:form>
+                 
+                    <h:form class="form-inline my-2 my-lg-0" >
+                    <p:inputText type="search" value="#{buscarPorTema.nombre}"/>
+                         
+                            <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{buscarPorTema.buscarTema()}" value="BuscarTema"></h:commandButton>
+                    </h:form>
+                    <h:form class="form-inline my-2 my-lg-0" >
+                    <p:inputText type="search" value="#{buscarPorPerfil.correo}"/>
+                         
+                            <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{buscarPorPerfil.buscarPerfil()}" value="BuscarPerfil"></h:commandButton>
+                    </h:form>
                     <h:form class ="form-inline my-2 my-lg-0">
-  			<p:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="perfili.xhtml?faces-redirect=true" value="Perfil"></p:commandButton>
+  			<h:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="perfil.xhtml?faces-redirect=true" value="Perfil"></h:commandButton>
                         </h:form>
                     <h:form class ="form-inline my-2 my-lg-0">
-  			<p:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="#{usuarioBean.cerrarSesion()}" value="Cerrar Sesión"></p:commandButton>
+  			<h:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="#{usuarioBean.cerrarSesion()}" value="Cerrar Sesión"></h:commandButton>
                         </h:form>
+                    <p:graphicImage value="#{usuarioBean.fotografia}"
+                            width="48"
+                            height="48"/>
   		</div>  
 	</nav>
-            <h:outputText value = "No se encontro resultados"  />
-        </h:body>
-           
-    </f:view>
-</html> 
+              <c:choose>
+              <c:when test="#{buscarPorTema.hayTema() and buscarPorTema.seBusco()}">
+    <h:form>
+    <p:accordionPanel>
+        <p:tab title="Tema Encontrado">
+            <h:panelGrid columns="2" cellpadding="10">
+                <div class="spinner-border text-success"></div>
+                 <h:outputText value="#{buscarPorTema.getT().get(0).getnombreT()}"></h:outputText> 
+                <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" value="MostrarMarcadores"></h:commandButton>
+                <c:when test="#{UsuarioBean.esInformador()}">
+                <h:panelGrid>
+                 <h:outputText value="Para agregar Marcador seleccione el mapa y automaticamente podra agregar un marcador"/>
+                 <h:outputText value="Para  Eliminar marcador seleccione el marcador en el mapa y estara la opción"/> 
+                 </h:panelGrid>
+                </c:when>
+                <c:when test="#{UsuarioBean.esInformador() or UsuarioBean.esAdministrador()}">
+                 <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{temaC.eliminaTema()}" value="EliminarTema"></h:commandButton>       
+            </c:when>
+                <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{buscarPorTema.seCancelo()}" value="Salir"></h:commandButton>
+            </h:panelGrid>
+        </p:tab>
+    </p:accordionPanel>
+</h:form>
+        </c:when>
+              <c:when test= "#{not buscarPorTema.hayTema() and buscarPorTema.seBusco()}">
+     <h:form>
+    <p:accordionPanel>
+        <p:tab title="Tema No Encontrado">
+            <h:panelGrid columns="2" cellpadding="10">
+                <div class="spinner-border text-success"></div>
+                 <h:outputText value="No se encontro el tema: "></h:outputText> 
+                 <c:when test="#{UsuarioBean.esInformador()}">
+                <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="noresultado1.xhtml?faces-redirect=true" value="AgregarTema"></h:commandButton>
+                 </c:when>
+                <h:commandButton class ="btn btn-warning my-2 my-sm-o" type="submit"  action="#{buscarPorTema.seCancelo()}" value="Cancelar" />
+
+            </h:panelGrid>
+        </p:tab>
+    </p:accordionPanel>
+</h:form>
+              </c:when>
+  </c:choose>
+    <c:choose>
+        <c:when test ="#{usuarioBean.esInformador()}">
+        <h1>Selecciona  <h:outputLabel value="#{usuarioBean.elUsuario().nombre}"/> el color </h1>
+    <h:form>
+    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+        <p:outputLabel for="color" value="Color:" />
+        <p:selectOneRadio id="color" value="#{temaC.color}"  layout="grid" columns="3">
+            <f:selectItems value="#{colores.colores}" var="c" itemLabel="#{color}" itemValue="#{color}"/>
+        </p:selectOneRadio>
+    </h:panelGrid>
+    </h:form>
+    <p:commandButton value="AgregarTema"   action="#{temaC.agregaTema()}"/>
+    </c:when>
+        <c:otherwise><h1>No Tienes los permisos necesarios. </h1></c:otherwise>
+         </c:choose>
+          </c:when>
+    <c:otherwise>
+      <h1>No deberias estar aqui. </h1>
+    </c:otherwise>
+    </c:choose>
+   
+
+</h:body>
+</html>

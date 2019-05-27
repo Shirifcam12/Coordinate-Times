@@ -41,6 +41,7 @@ public class MarcadoresController implements Serializable {
     private UtilityT utilt;
     private String title;
     private String data;
+    private static int id;
     
     @PostConstruct
     public void init() {
@@ -57,6 +58,14 @@ public class MarcadoresController implements Serializable {
 
     public MapModel getModel() {
         return model;
+    }
+
+    public static int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setModel(MapModel model) {
@@ -138,7 +147,7 @@ public class MarcadoresController implements Serializable {
     public void setData(String data) {
         this.data = data;
     }
-    public void addMarker() {
+    public String addMarker() {
         Marker marker = new Marker(new LatLng(latitud, longitud), descripcion);
         model.addOverlay(marker);
         Marcador m = new Marcador();
@@ -146,7 +155,7 @@ public class MarcadoresController implements Serializable {
         m.setDatos(datos);
         m.setLatitud(latitud);
         m.setLongitud(longitud);
-        m.setIdTema(tema.getIdT());
+        m.setIdTema(BuscarPorTema.getT().get(0).getIdT());
         util.guardaMarcador(m);
         model.addOverlay(new Marker(new LatLng(latitud, longitud),
                 descripcion,
@@ -155,12 +164,31 @@ public class MarcadoresController implements Serializable {
                 .addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_INFO,
                                 "Marcador añadido", "Lat:" + latitud + ", Lng:" + longitud));
+        
+      return "principal?faces-redirect=true";
     }
 
     public void onMarkerSelect(OverlaySelectEvent event) {
         Marker marker = (Marker) event.getOverlay();
         data = (String) marker.getData();
         title = (String) marker.getTitle();
+        id = obtenerID();
     }
+       public String eliminaMarcador() {
+        util.eliminaMarcadorPorTitulo(title);
+        Integer idx = -1;
+        for (int i = 0; i < model.getMarkers().size(); i++) {
+            if (model.getMarkers().get(i).getTitle().equals(title)) {
+                idx = i;
+            }
+        }
+        if (idx >= 0) {
+            model.getMarkers().remove(idx);
+        }
+        return "principal?faces-redirect=true";
+    }
+       public int obtenerID(){
+          return util.buscarMarcadorPorTitulo(title).getIdMarcador();
+       }
 
 }

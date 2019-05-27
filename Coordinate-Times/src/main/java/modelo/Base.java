@@ -1,17 +1,19 @@
 package modelo;
 
+import controlador.BuscarPorTema;
 import org.hibernate.Session;
 import controlador.UsuarioBean;
 import javax.faces.context.FacesContext;
 import javax.faces.application.FacesMessage;
 import java.util.Locale;
+import org.hibernate.HibernateException;
 /**
  * Clase que realiza la conexión de la base de datos y elimina características de la misma
  * @author Luna Menguante
  */
 public class Base{
 
-    static Session sessionObj;
+    static Session session;
     private UsuarioBean a ;
 /**
  * Método que elimina a un usuario de la base de datos
@@ -19,19 +21,19 @@ public class Base{
  */
     public void eliminarU(Usuario usuario){
         try {
-            sessionObj = HibernateUtil.getSessionFactory().openSession();
-            sessionObj.beginTransaction();
-            sessionObj.delete(usuario);
-            sessionObj.getTransaction().commit();
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.delete(usuario);
+            session.getTransaction().commit();
         } catch (Exception sqlException) {
-            if (null != sessionObj.getTransaction()) {
+            if (null != session.getTransaction()) {
                 System.out.println("\n.......Transaction Is Being Rolled Back.......");
-                sessionObj.getTransaction().rollback();
+                session.getTransaction().rollback();
             }
             sqlException.printStackTrace();
         } finally {
-            if (sessionObj != null) {
-                sessionObj.close();
+            if (session != null) {
+                session.close();
             }
         }
     }
@@ -41,19 +43,39 @@ public class Base{
  */
     public void eliminarT(Tema tema){
         try {
-            sessionObj = HibernateUtil.getSessionFactory().openSession();
-            sessionObj.beginTransaction();
-            sessionObj.delete(tema);
-            sessionObj.getTransaction().commit();
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.delete(tema);
+            session.getTransaction().commit();
         } catch (Exception sqlException) {
-            if (null != sessionObj.getTransaction()) {
+            if (null != session.getTransaction()) {
                 System.out.println("\n.......Transaction Is Being Rolled Back.......");
-                sessionObj.getTransaction().rollback();
+                session.getTransaction().rollback();
             }
             sqlException.printStackTrace();
         } finally {
-            if (sessionObj != null) {
-                sessionObj.close();
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+    
+      public void agregarTema(Tema tema) {
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            System.out.println("hola");
+            session.save(tema);
+            session.getTransaction().commit();
+        } catch (HibernateException ex) {
+            if (null != session.getTransaction()) {
+                System.out.println("\n.......Transaction Is Being Rolled Back.......");
+                session.getTransaction().rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
             }
         }
     }

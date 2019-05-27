@@ -6,8 +6,11 @@
 package modelo;
 
 import java.io.Serializable;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -24,14 +27,16 @@ import javax.persistence.Table;
 )
 public class Tema implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
     @Column(name = "idTema")
     private Integer idT;
 
     @Column(name = "idUsuario")
     private Integer idU;
     
-    @Column(name = "color_id")
-    private Integer idC;
+    @Column(name = "color")
+    private String idC;
     
     @Column(name = "nombreTema")
     private String nombre;
@@ -78,11 +83,11 @@ public class Tema implements Serializable {
         this.nombre = nombre;
     }
 
-    public Integer getIdC() {
+    public String getIdC() {
         return idC;
     }
 
-    public void setIdC(int idC) {
+    public void setIdC(String idC) {
         this.idC = idC;
     }
     @Override

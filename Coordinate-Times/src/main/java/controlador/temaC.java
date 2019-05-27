@@ -1,6 +1,7 @@
 package controlador;
 
 import java.util.Locale;
+import java.util.Random;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -8,6 +9,8 @@ import javax.faces.context.FacesContext;
 import modelo.Tema;
 import modelo.Utility;
 import modelo.Base;
+import modelo.Colores;
+import modelo.Marcador;
 import modelo.Usuario;
 /**
  * Bean manejado para eliminar temas
@@ -19,6 +22,8 @@ public class temaC{
         private Tema tema = new Tema();
         private Base u = new Base();
         private int usuario;
+        private UsuarioBean ub = new UsuarioBean();
+        private Colores color = new Colores();
         
 /**
  * Método que devuelve el tema guardado en el bean
@@ -36,6 +41,16 @@ public class temaC{
             this.tema = tema;
         }
 
+    public Colores getColor() {
+        return color;
+    }
+
+    public void setColor(Colores color) {
+        this.color = color;
+    }
+
+
+
 /**
  * Método constructor de la clase perfilC
  * 
@@ -49,28 +64,38 @@ public class temaC{
          * Metodo que se encarga de eliminar un tema
          * @return null si el registro es correcto y un mensaje de error en otro caso
          */	
-	public String eliminaTema(){		
-            
-		if(UsuarioBean.getUsuario1() == null){
-                    FacesContext.getCurrentInstance().addMessage(null
-                                                         , new FacesMessage(FacesMessage.SEVERITY_ERROR, "Inicia sesion para poder acceder a esta funcion", ""));
-
-                }else{
-                usuario = UsuarioBean.getUsuario1().getTipo();
-                if(usuario != 2 && usuario != 0){
-			FacesContext.getCurrentInstance().addMessage(null
-                                                         , new FacesMessage(FacesMessage.SEVERITY_ERROR, "No dispones de permisos para eliminar Temas", ""));
-		} else{
+        public String eliminaTema(){
+          if(!(ub.esAdministrador() || ub.esInformador())){
+                 FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "No dispones de permisos para eliminar Temas", ""));        
+                }
+          if(ub.elUsuario().getId() != BuscarPorTema.getT().get(0).getIdU()){
+              FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "No es tu tema", "")); 
+              }
+                  else{
 			FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha eliminado correctamenten el tema", ""));
-            
-              u.eliminarT(BuscarPorTema.getT().get(0));
-                        
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha eliminado correctamenten el Tema", ""));
+                        u.eliminarT(BuscarPorTema.getT().get(0));
                         tema = null;
 		}
-        }		
-		return null;
+        return BuscarPorTema.seCancelo1();
 	}
-
-
+        
+       public String agregaTema(){
+          if(!(ub.esInformador())){
+                 FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "No dispones de permisos para eliminar Temas", ""));        
+                }else{
+          Tema t = new Tema();
+          FacesContext context = FacesContext.getCurrentInstance();
+          Usuario a = (Usuario) context.getExternalContext().getSessionMap().get("usuario");
+          t.setIdU(a.getId());
+          t.setnombreT(BuscarPorTema.getNombreg());
+          Random r = new Random();
+          t.setIdC(color.getColores().get(r.nextInt(color.getColores().size())));
+          u.agregarTema(t);
+		}
+        return BuscarPorTema.seCancelo1();
+	}
 }

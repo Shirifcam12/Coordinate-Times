@@ -59,5 +59,28 @@ public ArrayList<Marcador> MostrarMarcadores(String tema){
             }
         }
     }
+        public void eliminaMarcadorPorTitulo(String titulo) {
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            Query q = session.createQuery("delete from Marcador where descripcion = :descripcion").setParameter("descripcion", titulo);
+            q.executeUpdate();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
+       public Marcador buscarMarcadorPorTitulo(String titulo) {
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            Query q = session.createQuery("from Marcador where descripcion = :descripcion").setParameter("descripcion", titulo);
+            List<Marcador> lista = q.list();
+            return lista.get(0);
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
 
 }

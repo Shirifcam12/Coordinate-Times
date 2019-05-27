@@ -25,7 +25,6 @@ public class BuscarPorPerfil {
  * @return La lista de usuarios almacenada en el bean
  */
     public static ArrayList<Usuario> getUs() {
-        System.out.println(us);
         return us;
     }
 /**
@@ -79,25 +78,6 @@ public class BuscarPorPerfil {
  * @return el redireccionamiento resultado de la busqueda
  */
     public String buscarPerfil() {
-        
-        us= u.buscarPerfil(correo);
-        if(correo == "" ){
-            return "";
-        }
-        if(us.isEmpty()){
-                FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "No se encontro el Perfil", ""));
-        return null;
-        }else{
-        return "perfil?faces-redirect=true";
-        }
-        
-    }
-    /**
- * Método que se cubre el caso de uso Buscar Perfil
- * @return el redireccionamiento resultado de la busqueda
- */
-    public String buscarPerfil1() {
         
         us= u.buscarPerfil(correo);
         if(correo == "" ){

@@ -24,6 +24,8 @@ import javax.persistence.Transient;
 public class Comentario {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
     @Column(name = "idComentario")
     private int idComentario;
 

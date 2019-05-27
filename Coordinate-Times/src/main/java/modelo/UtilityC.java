@@ -5,6 +5,8 @@
  */
 package modelo;
 import java.util.ArrayList;
+import static modelo.UtilityM.session;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -15,7 +17,7 @@ import org.hibernate.Session;
  */
 public class UtilityC {
     static Marcador marcadorObj;
-    static Session sessionObj;
+    static Session session;
     /**
      * Método que nos ayuda a obtener los comentarios almacenados en la base de datos dado un id
      * @param id- el id que nos ayuda a buscar en la base
@@ -27,4 +29,22 @@ public ArrayList<Comentario> mostrarComentarios(int id){
     ArrayList<Comentario> comentarios = (ArrayList<Comentario>) query.list();
     return comentarios;
 }   
+    public void guardaComentario(Comentario m) {
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.save(m);
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            if (null != session.getTransaction()) {
+                System.out.println("\n.......Transaction (Insert marker) Is Being Rolled Back.......");
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
 }

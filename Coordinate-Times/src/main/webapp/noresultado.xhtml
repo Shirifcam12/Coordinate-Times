@@ -1,36 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
-    <f:view>
-        <h:head>
-            <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+    xmlns:b="http://bootsfaces.net/ui">
+<h:head>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <style>
-  .fakeimg {
-    height: 150px;
-    background: #aaa;
+  <style>
+  .modal-header, h4, .close {
+    background-color: #b5ff33;
+    color:black !important;
+    text-align: center;
+    font-size: 30px;
   }
   </style>
-            <title>Resultado</title>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        </h:head>
-        <h:body>
-  	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+</h:head>
+<h:body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   		<h:form class="form-inline my-2 my-lg-0" >
-                    <p:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="principal.xhtml?faces-redirect=true" value = "Principal"></p:commandButton>
+                    <h:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="principal.xhtml?faces-redirect=true" value = "Principal"></h:commandButton>
+                   
   	        </h:form>
 	  	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     		<span class="navbar-toggler-icon"></span>
@@ -47,19 +44,24 @@ and open the template in the editor.
         			<a class="nav-link" href="#">Link</a>
 	      		</li>    
     		</ul>
-    		<h:form class="form-inline my-2 my-lg-0" >
-    			<p:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="buscar.xhtml?faces-redirect=true" value= "Buscar" ></p:commandButton>
-  			</h:form>
+                    <h:form class="form-inline my-2 my-lg-0"   >
+                    <p:inputText type="search" value="#{buscarPorTema.nombre}"/> 
+                  
+                    <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{buscarPorTema.buscarTema()}" value="BuscarTema"></h:commandButton>
+                    </h:form>
+                    <h:form class="form-inline my-2 my-lg-0" >
+                    <p:inputText type="search" value="#{buscarPorPerfil.correo}"/>
+                        
+                            <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{buscarPorPerfil.buscarPerfil()}" value="BuscarPerfil"></h:commandButton>
+                    </h:form>  
                     <h:form class ="form-inline my-2 my-lg-0">
-  			<p:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="registro.xhtml?faces-redirect=true" value="Registrarse"></p:commandButton>
+  			<h:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="registro.xhtml?faces-redirect=true" value="Registrarse"></h:commandButton>
                         </h:form>
                     <h:form class ="form-inline my-2 my-lg-0">
-  			<p:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="inicio-sesion.xhtml?faces-redirect=true" value="Iniciar Sesión"></p:commandButton>
+  			<h:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="inicio-sesion.xhtml?faces-redirect=true" value="Iniciar Sesión"></h:commandButton>
                         </h:form>
   		</div>  
 	</nav>
-            <h:outputText value = "No se encontro resultados"  />
-        </h:body>
-           
-    </f:view>
-</html> 
+
+</h:body>
+</html>

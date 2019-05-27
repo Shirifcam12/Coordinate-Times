@@ -22,7 +22,7 @@
     <h:body>
  	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   		<h:form class="form-inline my-2 my-lg-0" >
-                    <p:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="principal.xhtml?faces-redirect=true" value = "Principal"></p:commandButton>
+                    <h:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="principal.xhtml?faces-redirect=true" value = "Principal"></h:commandButton>
   	        </h:form>
 	  	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     		<span class="navbar-toggler-icon"></span>
@@ -39,14 +39,21 @@
         			<a class="nav-link" href="#">Link</a>
 	      		</li>    
     		</ul>
-    		<h:form class="form-inline my-2 my-lg-0" >
-    			<p:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="buscar.xhtml?faces-redirect=true" value= "Buscar" ></p:commandButton>
-  			</h:form>
+                    <h:form class="form-inline my-2 my-lg-0" >
+                    <p:inputText type="search" value="#{buscarPorTema.nombre}"/>
+                         
+                            <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{buscarPorTema.buscarTema()}" value="BuscarTema"></h:commandButton>
+                    </h:form>
+                    <h:form class="form-inline my-2 my-lg-0" >
+                    <p:inputText type="search" value="#{buscarPorPerfil.correo}"/>
+                         
+                            <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{buscarPorPerfil.buscarPerfil()}" value="BuscarPerfil"></h:commandButton>
+                    </h:form>
                     <h:form class ="form-inline my-2 my-lg-0">
-  			<p:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="registro.xhtml?faces-redirect=true" value="Registrarse"></p:commandButton>
+  			<h:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="registro.xhtml?faces-redirect=true" value="Registrarse"></h:commandButton>
                         </h:form>
                     <h:form class ="form-inline my-2 my-lg-0">
-  			<p:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="inicio-sesion.xhtml?faces-redirect=true" value="Iniciar Sesión"></p:commandButton>
+  			<h:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="inicio-sesion.xhtml?faces-redirect=true" value="Iniciar Sesión"></h:commandButton>
                         </h:form>
   		</div>  
 	</nav>
@@ -60,7 +67,7 @@
                 <h:outputLabel value="Contraseña" />
                 <p:password value="#{usuarioBean.contraseña}"/>
             </h:panelGrid>
-            <h:commandButton value="Iniciar Sesión" action="#{usuarioBean.login()}"/>
+            <h:commandButton value="Iniciar Sesión" action="#{usuarioBean.inicioSesion()}"/>
             </h:form>
     </h:body>
 </html>

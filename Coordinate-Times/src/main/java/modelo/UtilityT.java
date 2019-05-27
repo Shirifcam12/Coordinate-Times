@@ -7,6 +7,9 @@ package modelo;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.context.FacesContext;
+import static modelo.Utility.session;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -43,6 +46,7 @@ public class UtilityT {
             ArrayList<Usuario> usuarios = (ArrayList<Usuario>) query.list();
             return usuarios;
         }
+        
        public List<Tema> obtenTemas() {
         try {
             session = HibernateUtil.getSessionFactory().openSession();

@@ -18,7 +18,7 @@ import modelo.Utility;
 import static modelo.listener.UsuarioInsertEventListener.enviaMensaje;
 import org.primefaces.model.UploadedFile;
 /**
- * Bean manejado para Registrar usurios 
+ * Bean manejado para Registrar usuarios 
  * @author Luna Menguante
  */
 @ManagedBean
@@ -74,7 +74,7 @@ public class RegisterController {
  * Método que  nos ayuda a registrar un usuario
  * @return null si el registro es correcto y un mensaje de error en otro caso
  */
-    public String addUser() {
+    public String registrar() {
         if (!user.getContraseña().equals(confirmacionPassword)) {
             FacesContext.getCurrentInstance()
                     .addMessage("registroForm:growl",
@@ -85,9 +85,16 @@ public class RegisterController {
                 .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                         + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
            Matcher mather = pattern.matcher(user.getCorreo());
+            if (fotografia != null) {
+                user.setFotografia(fotografia.getContents());
+            } else {
+                user.setFotografia(null);
+            }
             String hash = md5(user.getNombre() + user.getContraseña() + user.getCorreo());
             user.setActivacion(hash);
            if(mather.find() == true){
+                        FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha enviado un correo de confirmación", ""));
             u.guardaUsuario(user);
             enviaMensaje(user);
             user = null;

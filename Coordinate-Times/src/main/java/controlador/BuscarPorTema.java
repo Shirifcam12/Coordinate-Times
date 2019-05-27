@@ -1,15 +1,20 @@
 package controlador;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
+import java.util.Map;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import modelo.Tema;
 import modelo.UtilityT;
+import org.primefaces.PrimeFaces;
+import org.primefaces.event.SelectEvent;
 /**
  * Bean manejado para el caso de uso buscar tema
  * @author Luna Menguante
@@ -20,6 +25,8 @@ public class BuscarPorTema {
     private String nombre;
     static ArrayList<Tema> t = new ArrayList<Tema>();
     private UtilityT u = new UtilityT();
+    static int a;
+    static String nombreg;
     /**
  * Método que devuelve la lista de temas guardados en el bean
  * @return La lista de usuarios almacenada en el bean
@@ -27,13 +34,25 @@ public class BuscarPorTema {
     public static ArrayList<Tema> getT() {
         return t;
     }
-/**
- * Método que asigna la lista de temas a guardar en el bean
- * @param us- la lista de temas a almacenar
- */
-    public void setT(ArrayList<Tema> t) {
-        this.t = t;
+    
+    public static ArrayList<Tema> setT(ArrayList<Tema> t){
+        BuscarPorTema.t = t;
+        return null;
     }
+    
+    public static String getNombreg(){
+        return nombreg;
+    }
+
+    public int getA() {
+        return a;
+    }
+
+    public void setA(int a) {
+        this.a = a;
+    }
+    
+
 /**
  * Método que devuelve la instancia de UtilityT guardada en el bean
  * @return La instancia de UtilityT almacenada en el bean
@@ -67,6 +86,7 @@ public class BuscarPorTema {
  * 
  */
     public BuscarPorTema() {
+        
         FacesContext.getCurrentInstance()
                 .getViewRoot()
                 .setLocale(new Locale("es-Mx"));
@@ -76,39 +96,47 @@ public class BuscarPorTema {
  * @return el redireccionamiento resultado de la busqueda
  */
     public String buscarTema() {
-        
+        a=0;
+        nombreg = nombre;
         t = u.buscarTema(nombre);
         if(nombre == "" ){
-            return "";
+            return "principal?faces-redirect=true";
         }
         if(t.isEmpty()){
+            a=1;
         FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "No se encontro el tema", ""));
-        return null;
+        return "principal?faces-redirect=true";
         }else{
-        return "resultado?faces-redirect=true";
+            a=1;
+        return "principal?faces-redirect=true";
         }
         
     }
-/**
- * Método que  cubre el caso de uso Buscar Tema
- * @return el redireccionamiento resultado de la busqueda
- */
-    public String buscarTema1() {
-        
-        t = u.buscarTema(nombre);
-        if(nombre == "" ){
-            return "";
-        }
+    public String seCancelo() { 
+        a=0;
+       return "principal?faces-redirect=true";
+    }
+    
+    public static String seCancelo1(){
+        a=0;
+        return "principal?faces-redirect=true";
+    }
+    
+    public boolean hayTema(){
         if(t.isEmpty()){
-        FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "No se encontro el tema", ""));
-        return null;
-        }else{
-        return "resultado1?faces-redirect=true";
+            return false;
         }
-        
+        return true;
+    }
+    
+    public boolean seBusco(){
+        if(a==0){
+            return false;
+        }
+        return true;
     }
 }
+
 
 

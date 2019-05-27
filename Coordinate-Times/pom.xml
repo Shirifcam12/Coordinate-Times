@@ -31,6 +31,12 @@
       <version>4.0.1</version>
       <scope>provided</scope>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.webjars/bootstrap-modal -->
+<dependency>
+    <groupId>org.webjars</groupId>
+    <artifactId>bootstrap-modal</artifactId>
+    <version>2.2.5</version>
+</dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>jstl</artifactId>
@@ -52,13 +58,19 @@
     <dependency>
       <groupId>org.primefaces</groupId>
       <artifactId>primefaces</artifactId>
-      <version>6.0</version>
+      <version>6.2</version>
+      <type>jar</type>
     </dependency>
     <!-- Agrega la dependencia a Hibernate -->
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
       <version>9.4-1200-jdbc41</version>
+    </dependency>
+    <dependency>
+    <groupId>org.webjars.bower</groupId>
+    <artifactId>bootstrap-toggle</artifactId>
+    <version>2.2.2</version>
     </dependency>
     <dependency>
         <groupId>org.hibernate</groupId>
@@ -83,7 +95,16 @@
         <artifactId>openlayers</artifactId>
         <version>3.0.0</version>
     </dependency>
-
+    <dependency>
+      <groupId>commons-fileupload</groupId>
+      <artifactId>commons-fileupload</artifactId>
+      <version>1.4</version>
+    </dependency>
+    <dependency>
+      <groupId>org.primefaces.themes</groupId>
+      <artifactId>bootstrap</artifactId>
+      <version>1.0.10</version>
+    </dependency>
   </dependencies>	
     <repositories>
         <repository>

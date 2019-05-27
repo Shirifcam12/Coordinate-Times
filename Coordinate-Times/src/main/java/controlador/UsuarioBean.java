@@ -15,6 +15,8 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import modelo.Usuario;
 import modelo.Utility;
+import org.primefaces.model.ByteArrayContent;
+import org.primefaces.model.StreamedContent;
 
 
 
@@ -51,7 +53,7 @@ public class UsuarioBean {
  * @return null si el inicio de sesión es correcto y un mensaje de error en otro caso
  * @throws Exception Error alguna parte del inicio de sesión
  */
-    public String login() throws Exception{ 
+    public String inicioSesion() throws Exception{ 
           Usuario u = utility.obtenUsuario(correo, contraseña);
         if (u != null) {
             if (!u.isActivo()) {
@@ -64,13 +66,13 @@ public class UsuarioBean {
             usuario1 = u;
             usuarioelimina = u;
             context.getExternalContext().getSessionMap().put("usuario", u);
-            return "exito.xhtml?faces-redirect=true";
+            return "principal.xhtml?faces-redirect=true";
         }
         FacesContext.getCurrentInstance()
                 .addMessage("loginGrowl",
                         new FacesMessage(FacesMessage.SEVERITY_ERROR,
                                 "Error!", "Error al iniciar sesión, verificar usuario y/o contraseña"));
-        return "inicio-sesion.xhtml?faces-redirect=true";
+        return "";
     }
 /**
  * Método que devuelve el usuario para el caso de uso elimina usuario guardado en el bean
@@ -117,7 +119,7 @@ public class UsuarioBean {
      * Metodo que se encarga de hacer el cierre de sesión
      * @return el redireccionamiento resultado de la busqueda
      */
-    public void logout() throws IOException {
+    public void cerrarSesion() throws IOException {
         FacesContext context = FacesContext.getCurrentInstance();
         context.getExternalContext().invalidateSession();
         context.getExternalContext().redirect("principal.xhtml?faces-redirect=true");
@@ -139,5 +141,53 @@ public class UsuarioBean {
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
-}    
+    
+    public boolean estaConectado (){
+        FacesContext context = FacesContext.getCurrentInstance();
+        Usuario a = (Usuario) context.getExternalContext().getSessionMap().get("usuario");
+        return a != null;
+    }
+    public boolean esAdministrador (){
+        FacesContext context = FacesContext.getCurrentInstance();
+        Usuario a = (Usuario) context.getExternalContext().getSessionMap().get("usuario");
+        if(a==null) return false;
+        if (a.getTipo() == 0){
+            return true;
+        }
+        return false;   
+    }
+       public boolean esComentarista (){
+        FacesContext context = FacesContext.getCurrentInstance();
+        Usuario a = (Usuario) context.getExternalContext().getSessionMap().get("usuario");
+        if(a==null) return false;
+        if (a.getTipo() == 1){
+            return true;
+        }
+        return false;   
+    }
+          public boolean esInformador (){
+        FacesContext context = FacesContext.getCurrentInstance();
+        Usuario a = (Usuario) context.getExternalContext().getSessionMap().get("usuario");
+        if(a==null) return false;
+        if (a.getTipo() == 2){
+            return true;
+        }
+        return false;   
+    }
+    
+    public Usuario elUsuario(){
+        FacesContext context = FacesContext.getCurrentInstance();
+        Usuario a = (Usuario) context.getExternalContext().getSessionMap().get("usuario");
+        return a;
+    }
+    
+    public StreamedContent getFotografia(){
+        FacesContext context = FacesContext.getCurrentInstance();
+        Usuario a = (Usuario) context.getExternalContext().getSessionMap().get("usuario");
+        if (a.getFotografia() != null) {
+            return new ByteArrayContent(a.getFotografia());
+        }
+        return null;
+    }
+}
 
