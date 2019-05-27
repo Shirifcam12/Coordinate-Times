@@ -32,7 +32,7 @@ public class perfilC{
          * @return null si el registro es correcto y un mensaje de error en otro caso
          */
 	public String eliminaPerfil(){
-          if(ub.esAdministrador()){
+          if(ub.esAdministrador() && ub.elUsuario().equals(BuscarPorPerfil.getUs().get(0))){
                  FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "No puedes eliminarte de esta forma Administrador, tendras que eliminarte directamente de la base", ""));        
                 }else{
@@ -40,6 +40,7 @@ public class perfilC{
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha eliminado correctamenten el perfil", ""));
                         u.eliminarU(BuscarPorPerfil.getUs().get(0));
                         usuario = null;
+                        return "principal?faces-redirect=true";
 		}
                 
         return null;

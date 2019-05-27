@@ -189,34 +189,24 @@
                     cellspacing="1" cellpadding="1"> 
          <h:column>
          <r:facet name="header">idUsuario</r:facet>
-                    #{dato.idUsuario}
+                 <h:outputText value="#{dato.idUsuario}" /> 
          </h:column>
          <h:column>
          <r:facet name="header">comentario</r:facet>
-                    #{dato.comentario}
+                <h:outputText value="#{dato.comentario}"/>
          </h:column>
          <h:column>
          <r:facet name="header">fecha</r:facet>
-                    #{dato.fecha}
+                  <h:outputText value="#{dato.fecha}" />
          </h:column>
-             <h:column>
-                 <r:facet name="header">Eliminar</r:facet>
-                <p:growl id="message" showDetail="true" />
-
-                <p:commandButton value="Eliminar"  update="message">
-                      <p:confirm header="Confirmación" message="¿Estas seguro de eliminarlo?" icon="pi pi-exclamation-triangle" />
-                  </p:commandButton>
-
-                  <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                      <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
-                      <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
-                  </p:confirmDialog>
-
-             </h:column>
-             
-       </h:dataTable>
-            
-            
+         <h:column>
+         <r:facet name="header">  </r:facet>
+         <h:column rendered="#{comentarioC.suComentario(dato.idUsuario) or usuarioBean.esAdministrador()}">
+         <h:commandButton value="Eliminar" >
+         </h:commandButton>
+         </h:column>
+         </h:column>
+       </h:dataTable>    
         </h:form> 
       </div>
     </div>

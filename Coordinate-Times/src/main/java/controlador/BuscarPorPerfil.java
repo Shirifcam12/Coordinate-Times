@@ -78,15 +78,14 @@ public class BuscarPorPerfil {
  * @return el redireccionamiento resultado de la busqueda
  */
     public String buscarPerfil() {
-        
         us= u.buscarPerfil(correo);
         if(correo == "" ){
-            return "";
+            return "principal?faces-redirect=true";
         }
         if(us.isEmpty()){
                 FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "No se encontro el Perfil", ""));
-        return null;
+        return "principal?faces-redirect=true";
         }else{
         return "perfilb?faces-redirect=true";
         }

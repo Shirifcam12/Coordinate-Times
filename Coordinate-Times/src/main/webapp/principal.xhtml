@@ -154,6 +154,8 @@
                     <h3><p:outputLabel value="#{marcadoresController.title}" /></h3>
                     <br/>
                     <p:outputLabel value="${marcadoresController.data}" /><br/>
+                    <br/>
+                    <p:outputLabel value="${marcadoresController.getId()}" /><br/>
                     <h:form>
                       <h:inputHidden value="#{marcadoresController.title}"/>
                       <h:commandButton value="VerDetalles" action= "resultado.xhtml?faces-redirect=true" />

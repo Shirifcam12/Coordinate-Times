@@ -98,6 +98,7 @@ public class RegisterController {
             u.guardaUsuario(user);
             enviaMensaje(user);
             user = null;
+            fotografia = null;
            }else{
                FacesContext.getCurrentInstance().addMessage(null
                                                          , new FacesMessage(FacesMessage.SEVERITY_ERROR, "El correo no es valido", ""));
