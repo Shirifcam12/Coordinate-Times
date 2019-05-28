@@ -103,7 +103,7 @@ public class perfilC{
         }
 
                 /**
-         * Metodo que se encarga de eliminar un perfil 
+         * Metodo que se encarga de editar tu perfil 
          * @return null si el registro es correcto y un mensaje de error en otro caso
          */
         public String editaPerfil(){
@@ -123,6 +123,38 @@ public class perfilC{
                     FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_ERROR, "A ocurido un error favor de contactar a un administrador", ""));        
 
+                }
+            }
+            return null;
+        }
+
+                        /**
+         * Metodo que se encarga de eliminar un perfil 
+         * @return null si el registro es correcto y un mensaje de error en otro caso
+         */
+        public String borrarComentario(int idcomentario){
+            if(UsuarioBean.getUsuario1() == null){
+                FacesContext.getCurrentInstance().addMessage(null
+                                                         , new FacesMessage(FacesMessage.SEVERITY_ERROR, "Inicia sesion para poder acceder a esta funcion", ""));
+
+            }else{
+                Comentario borrar = BuscarPorComentario.getComentario().get(0);
+                usuario = UsuarioBean.getUsuario1().getTipo();      
+                if(usuario == 0){
+                    FacesContext.getCurrentInstance().addMessage(null
+                                                         , new FacesMessage(FacesMessage.SEVERITY_ERROR, "Los administradores no se pueden eliminar ellos mismos, favor de contactar con el propietario", ""));
+                }else{
+                    if(borrar == null){
+                        FacesContext.getCurrentInstance().addMessage(null,
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR, "No existe el comentario a eliminar", ""));
+                    }else{
+
+                        FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha eliminado correctamente el comentario", ""));
+                        u.eliminarC(borrar);
+                        usuario = null;
+                        borrar = null;
+                    }
                 }
             }
             return null;

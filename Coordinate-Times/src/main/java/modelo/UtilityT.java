@@ -43,4 +43,15 @@ public class UtilityT {
             return usuarios;
         }
 	
+    /**
+     * Método que busca usuarios dado un correo
+     * @param correo- el correo con el cual vamos a buscar 
+     * @return un Array list con el perfil asociado al correo dado
+    */
+    public ArrayList<Usuario> buscarComentario(Int idComentario){ 
+        Query query = HibernateUtil.getCurrentSession().createQuery("FROM Comentario c WHERE c.idComentario = :idComentario");
+            query.setParameter("idComentario", idComentario);
+            ArrayList<Comentario> comentarios = (ArrayList<Comentario>) query.list();
+            return comentarios;
+        }
 }	    

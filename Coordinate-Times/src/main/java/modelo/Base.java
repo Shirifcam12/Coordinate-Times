@@ -80,4 +80,27 @@ public class Base{
             }
         }
     }
+
+        /**
+ * Método que elimina el comentario de un usuario de la base de datos
+ * @param comentario el comentario que se borrara
+ */
+    public void eliminaC(Comentario comentario){
+        try {
+            sessionObj = HibernateUtil.getSessionFactory().openSession();
+            sessionObj.beginTransaction();
+            sessionObj.delete(comentario);
+            sessionObj.getTransaction().commit();
+        } catch (Exception sqlException) {
+            if (null != sessionObj.getTransaction()) {
+                System.out.println("\n.......Transaction Is Being Rolled Back.......");
+                sessionObj.getTransaction().rollback();
+            }
+            sqlException.printStackTrace();
+        } finally {
+            if (sessionObj != null) {
+                sessionObj.close();
+            }
+        }
+    }
 }
