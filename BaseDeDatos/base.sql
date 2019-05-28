@@ -57,16 +57,16 @@ CREATE TABLE Base.color (
 );
 
 CREATE TABLE Base.tema(
-	idTema Serial primary key,
+	idTema serial primary key,
 	idUsuario integer NOT NULL,
-	color_id integer NOT NULL references Base.color(id),
+	color text NOT NULL,
 	nombreTema text NOT NULL,
 	CONSTRAINT fk_idUsuario FOREIGN KEY (idUsuario) REFERENCES Base.usuario(idUsuario) ON DELETE CASCADE,
 	CONSTRAINT nombre unique(nombreTema)
 );
 
 CREATE TABLE Base.marcador(
-	idMarcador Serial primary key,
+	idMarcador serial primary key,
 	idTema integer NOT NULL,
 	latitud FLOAT NOT NULL,
 	longitud FLOAT NOT NULL,
@@ -82,7 +82,7 @@ CREATE TABLE Base.comentario(
 	idMarcador integer not NULL,
 	idTema integer not NULL,
 	comentario text NOT NULL,
-	fecha date,
+	fecha text,
 	gusta integer,
 	nogusta integer,
 	CONSTRAINT id_comentario_pkey unique(idComentario,idMarcador,idTema),
@@ -98,5 +98,5 @@ values ('black', '#000000'),
        ('blue', '#0000FF'),
        ('green', '#008000');
 
-insert into Base.tema(idUsuario,color_id,nombreTema) values(1,1,'Hospital');
+insert into Base.tema(idUsuario,color,nombreTema) values(1,'azul','Hospital');
 insert into base.marcador(idTema,latitud,longitud,datos_utiles,descripcion) values (1,19.322930,-99.221742,'Complicado','Meh');
