@@ -198,15 +198,24 @@
          <h:column>
          <r:facet name="header">fecha</r:facet>
                   <h:outputText value="#{dato.fecha}" />
+         </h:column>    
+         <h:column rendered = "#{usuarioBean.esComentarista()}">
+            <r:facet name="header">Calificar</r:facet>
+            <h:commandButton value="Me gusta" action="#{calificacionC.calificaComentarios(dato, true)}" />
+            <h:outputText value="=#{dato.gusta}" />
+            <h:commandButton value="No me gusta" action="#{calificacionC.calificaComentarios(dato, false)}" />
+            <h:outputText value="=#{dato.nogusta}" />
          </h:column>
          <h:column>
          <r:facet name="header">  </r:facet>
          <h:column rendered="#{comentarioC.suComentario(dato.idUsuario) or usuarioBean.esAdministrador()}">
-         <h:commandButton value="Eliminar" >
+         <h:commandButton value="Eliminar" action="#{comentarioC.eliminaComentario(dato)}" >
          </h:commandButton>
          </h:column>
          </h:column>
-       </h:dataTable>    
+       </h:dataTable>
+              <p:growl id="growl" life="2000" />
+              <p:commandButton id="withIcon"  update="growl" icon="pi pi-star" />
         </h:form> 
       </div>
     </div>

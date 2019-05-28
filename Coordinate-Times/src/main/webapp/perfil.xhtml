@@ -126,8 +126,21 @@
        <tr>
                     
                     <td>
-      <p:commandButton  value="EliminarPerfil"/></td>
+                     <p:commandButton  value="EliminarPerfil" action = "#{perfilC.eliminaTuPerfil()}"/></td>
        </tr>
+       <tr>
+                    
+                    <td>
+                     <p:commandButton  value="EditaPerfil" action="editar.xhtml?faces-redirect=true"/></td>
+       </tr>
+        <c:choose>
+            <c:when test ="#{usuarioBean.esAdministrador()}">
+                  <tr>
+                    <td>
+                     <p:commandButton  value="Registrar Informador" action="comentaristas.xhtml?faces-redirect=true"/></td>
+                  </tr>   
+            </c:when>
+        </c:choose>
 	</h:form>
   </h:body>
   </f:view>

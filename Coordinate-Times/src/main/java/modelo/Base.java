@@ -79,4 +79,24 @@ public class Base{
             }
         }
     }
+    public void editaU(Usuario usuario){
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.update(usuario);
+            session.getTransaction().commit();
+        } catch (Exception sqlException) {
+            if (null != session.getTransaction()) {
+                System.out.println("\n.......Transaction Is Being Rolled Back.......");
+                session.getTransaction().rollback();
+            }
+            sqlException.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    
 }

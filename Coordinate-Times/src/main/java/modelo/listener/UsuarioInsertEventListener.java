@@ -27,6 +27,11 @@ public class UsuarioInsertEventListener implements PostInsertEventListener {
             + "<a href=\"http://localhost:8080/Coordinate-Times/validacion?val={2}\">https://localhost:8080/Coordinate-Times/validacion?val={2}</a><br/>\n"
             + "\n\n¡Gracias!<br/>\n\n"
             + "Atentamente: El equipo de Luna Menguante &#169;";
+    private static final String MENSAJEINF = "Hola <b>{0}</b><br/>\n Has sido seleccionado para ser Informador dentro de Coordinate Times"
+            + "\n\n¡Bienvenido a Coordinate Times Informador!<br/>\n\n"
+            + "Atentamente: El equipo de Luna Menguante &#169;";
+    
+    private static final String ASUNTO2 = "Coordinate Times te notifica";
 
     private static final String ASUNTO = "Validación de registro en Coordinate Times";
 
@@ -56,6 +61,16 @@ public class UsuarioInsertEventListener implements PostInsertEventListener {
             final Object[] array = {usuario.getNombre(), HOST(), usuario.getActivacion()};
             String mensaje = format.format(array);
             EnviarEmail.sendEmail(usuario.getCorreo(), ASUNTO, mensaje);
+        } catch (MessagingException ex) {
+            Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public static void enviaMensajeInf(Usuario usuario) {
+        try {
+            MessageFormat format = new MessageFormat(MENSAJEINF);
+            final Object[] array = {usuario.getNombre(), HOST(), usuario.getActivacion()};
+            String mensaje = format.format(array);
+            EnviarEmail.sendEmail(usuario.getCorreo(), ASUNTO2, mensaje);
         } catch (MessagingException ex) {
             Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
         }

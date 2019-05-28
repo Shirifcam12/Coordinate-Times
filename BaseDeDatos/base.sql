@@ -85,9 +85,23 @@ CREATE TABLE Base.comentario(
 	fecha text,
 	gusta integer,
 	nogusta integer,
+	total integer,
 	CONSTRAINT id_comentario_pkey unique(idComentario,idMarcador,idTema),
 	CONSTRAINT fk_idComeentario FOREIGN KEY(idMarcador,idTema) REFERENCES Base.marcador(idMarcador,idTema) ON DELETE CASCADE
 );
+
+CREATE TABLE Base.calificacion(
+	idCalificacion serial primary Key,
+	idUsuario integer not NULL,
+	idComentario integer not NULL,
+	eleccion boolean,
+	CONSTRAINT id_calificar_pkey unique (idCalificacion,idUsuario,idComentario),
+	CONSTRAINT fk_idCalificacion  FOREIGN KEY(idComentario) REFERENCES
+Base.comentario(idComentario) ON DELETE CASCADE,
+	CONSTRAINT fk1_idCalificacion FOREIGN KEY(idUsuario) REFERENCES
+Base.usuario(idUsuario) ON DELETE CASCADE
+);
+
 insert into Base.usuario(nombreUsuario,contrasena,correo,tipo,activo) values('Shirifcam','contraseñña','shirifcam@gmail.com','0',true);
 
 	

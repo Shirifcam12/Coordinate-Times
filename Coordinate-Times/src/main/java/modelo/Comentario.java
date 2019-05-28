@@ -5,6 +5,7 @@
  */
 package modelo;
 
+import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -43,6 +44,17 @@ public class Comentario {
     
     @Column(name = "fecha")
     private String fecha;
+    
+    @Column(name = "gusta")
+    private int gusta;
+    
+    @Column(name = "nogusta")
+    private int nogusta;
+    
+    @Column(name="total")
+    private int total;
+    
+    
 /**
  * Método que devuelve el id asociado al comentario guardado en el bean
  * @return Elcomentario  almacenado en el bean
@@ -128,6 +140,30 @@ public class Comentario {
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
-    
 
+    
+    public int getGusta() {
+        return gusta;
+    }
+
+    public void setGusta(int gusta) {
+        this.gusta = gusta;
+    }
+
+    public int getNogusta() {
+        return nogusta;
+    }
+
+    public void setNogusta(int nogusta) {
+        this.nogusta = nogusta;
+    }
+
+    public int getTotal() {
+        total = gusta + nogusta;
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
 }

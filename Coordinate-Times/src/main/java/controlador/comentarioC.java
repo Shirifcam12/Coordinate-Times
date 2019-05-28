@@ -26,6 +26,7 @@ import org.hibernate.Query;
 @SessionScoped
 public class comentarioC {
     private ArrayList<Comentario> c;
+    private ArrayList<Usuario> comentaristas;
     private UtilityC u = new UtilityC();
     private Comentario comentario = new Comentario();
     private UsuarioBean ub = new UsuarioBean();
@@ -102,20 +103,34 @@ public class comentarioC {
     public String agregaComentario(int idm){
           if(!(ub.esComentarista())){
                  FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "No dispones de permisos para eliminar Temas", ""));        
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "No dispones de permisos ", ""));        
                 }else{
           FacesContext context = FacesContext.getCurrentInstance();
           Usuario a = (Usuario) context.getExternalContext().getSessionMap().get("usuario");
           comentario.setIdUsuario(a.getId());
-          comentario.setIdTema(BuscarPorTema.getT().get(0).getIdT());
+          comentario.setIdTema(u.mostrarMarcador(idm).get(0).getIdTema());
           Date date = new Date();
           DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
           String fecha = ""+dateFormat.format(date); 
           comentario.setFecha(fecha);
           comentario.setIdMarcador(idm);
           comentario.setComentario(comentariot);
+          comentario.setGusta(0);
+          comentario.setNogusta(0);
+          comentario.setTotal(0);
           u.guardaComentario(comentario);
           comentariot = null;
+		}
+        return "resultado?faces-redirect=true";
+	}
+        public String eliminaComentario(Comentario com){
+          if(!(ub.esComentarista())){
+                 FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "No dispones de permisos ", ""));        
+                }else{
+              		FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha eliminado correctamenten el Comentario", ""));
+                  u.eliminarC(com);
 		}
         return "resultado?faces-redirect=true";
 	}
@@ -123,15 +138,20 @@ public class comentarioC {
         int w = id;
         FacesContext context = FacesContext.getCurrentInstance();
         Usuario a = (Usuario) context.getExternalContext().getSessionMap().get("usuario");
-         System.out.println(a.getId());
         if(a==null) return false;
-        System.out.println(a.getId());
-        System.out.println(w);
         if(a.getId() == w){
             return true;
         }
         return false;
     }
+    
+  public ArrayList<Usuario> obtenerComentaristas(){ 
+    Query query = HibernateUtil.getCurrentSession().createQuery("FROM Usuario u WHERE u.tipo = '1'");
+    comentaristas = (ArrayList<Usuario>) query.list();
+    System.out.println(comentaristas);
+    return comentaristas;
+  }  
+  
 }
 
 

@@ -28,7 +28,13 @@ public ArrayList<Comentario> mostrarComentarios(int id){
     query.setParameter("id", id);
     ArrayList<Comentario> comentarios = (ArrayList<Comentario>) query.list();
     return comentarios;
-}   
+} 
+public ArrayList<Marcador> mostrarMarcador(int id){ 
+    Query query = HibernateUtil.getCurrentSession().createQuery("FROM Marcador c WHERE c.idMarcador = :id");
+    query.setParameter("id", id);
+    ArrayList<Marcador> comentarios = (ArrayList<Marcador>) query.list();
+    return comentarios;
+}  
     public void guardaComentario(Comentario m) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
@@ -41,6 +47,42 @@ public ArrayList<Comentario> mostrarComentarios(int id){
                 session.getTransaction().rollback();
             }
             e.printStackTrace();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
+        public void eliminarC(Comentario comentario){
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.delete(comentario);
+            session.getTransaction().commit();
+        } catch (Exception sqlException) {
+            if (null != session.getTransaction()) {
+                System.out.println("\n.......Transaction Is Being Rolled Back.......");
+                session.getTransaction().rollback();
+            }
+            sqlException.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+    public void actualizaComentario(Comentario comentario) {
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.update(comentario);
+            session.getTransaction().commit();
+        } catch (HibernateException ex) {
+            if (null != session.getTransaction()) {
+                System.out.println("\n.......Transaction Is Being Rolled Back.......");
+                session.getTransaction().rollback();
+            }
+            ex.printStackTrace();
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();

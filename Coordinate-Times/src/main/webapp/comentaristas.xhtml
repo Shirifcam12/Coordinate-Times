@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:r="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Mostrar</title>
+    </h:head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <style>
+  .fakeimg {
+    height: 150px;
+    background: #aaa;
+  }
+  </style>
+    <h:body>
+ <c:choose>
+          <c:when test="#{usuarioBean.estaConectado()}">
+              <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  		<h:form class="form-inline my-2 my-lg-0" >
+                    <h:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="principal.xhtml?faces-redirect=true" value = "Principal"></h:commandButton>
+  	        </h:form>
+	  	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    		<span class="navbar-toggler-icon"></span>
+  		</button>
+  		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+  	  		<ul class="navbar-nav mr-auto">
+      			<li class="nav-item">
+        			<a class="nav-link" href="#">Link</a>
+      			</li>
+      			<li class="nav-item">
+        			<a class="nav-link" href="#">Link</a>
+    	  		</li>
+      			<li class="nav-item">
+        			<a class="nav-link" href="#">Link</a>
+	      		</li>    
+    		</ul>
+                 
+                    <h:form class="form-inline my-2 my-lg-0" >
+                    <p:inputText type="search" value="#{buscarPorTema.nombre}"/>
+                         
+                            <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{buscarPorTema.buscarTema()}" value="BuscarTema"></h:commandButton>
+                    </h:form>
+                    <h:form class="form-inline my-2 my-lg-0" >
+                    <p:inputText type="search" value="#{buscarPorPerfil.correo}"/>
+                         
+                            <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{buscarPorPerfil.buscarPerfil()}" value="BuscarPerfil"></h:commandButton>
+                    </h:form>
+                    <h:form class ="form-inline my-2 my-lg-0">
+  			<h:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="perfil.xhtml?faces-redirect=true" value="Perfil"></h:commandButton>
+                        </h:form>
+                    <h:form class ="form-inline my-2 my-lg-0">
+  			<h:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="#{usuarioBean.cerrarSesion()}" value="Cerrar Sesión"></h:commandButton>
+                        </h:form>
+                    <p:graphicImage value="#{usuarioBean.fotografia}"
+                            width="48"
+                            height="48"/>
+  		</div>  
+	</nav>
+              <c:choose>
+
+              <c:when test= "#{not buscarPorTema.hayTema() and buscarPorTema.seBusco()}">
+     <h:form>
+    <p:accordionPanel>
+        <p:tab title="Tema No Encontrado">
+            <h:panelGrid columns="2" cellpadding="10">
+                <div class="spinner-border text-success"></div>
+                 <h:outputText value="No se encontro el tema: "></h:outputText> 
+                 <c:when test="#{UsuarioBean.esInformador()}">
+                     <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{temaC.agregaTema()}" value="AgregarTema"></h:commandButton>
+                 </c:when>
+                <h:commandButton class ="btn btn-warning my-2 my-sm-o" type="submit"  action="#{buscarPorTema.seCancelo()}" value="Cancelar" />
+
+            </h:panelGrid>
+        </p:tab>
+    </p:accordionPanel>
+</h:form>
+              </c:when>
+  </c:choose>
+
+          </c:when>
+         <c:otherwise>
+ 	 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  		<h:form class="form-inline my-2 my-lg-0" >
+                    <h:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="principal.xhtml?faces-redirect=true" value = "Principal"></h:commandButton>
+  	        </h:form>
+	  	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    		<span class="navbar-toggler-icon"></span>
+  		</button>
+  		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+  	  		<ul class="navbar-nav mr-auto">
+      			<li class="nav-item">
+        			<a class="nav-link" href="#">Link</a>
+      			</li>
+      			<li class="nav-item">
+        			<a class="nav-link" href="#">Link</a>
+    	  		</li>
+      			<li class="nav-item">
+        			<a class="nav-link" href="#">Link</a>
+	      		</li>    
+    		</ul>
+                    <h:form class="form-inline my-2 my-lg-0" >
+                    <p:inputText type="search" value="#{buscarPorTema.nombre}"/>
+                         
+                            <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{buscarPorTema.buscarTema()}" value="BuscarTema"></h:commandButton>
+                    </h:form>
+                    <h:form class="form-inline my-2 my-lg-0" >
+                    <p:inputText type="search" value="#{buscarPorPerfil.correo}"/>
+                         
+                            <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{buscarPorPerfil.buscarPerfil()}" value="BuscarPerfil"></h:commandButton>
+                    </h:form>
+                    <h:form class ="form-inline my-2 my-lg-0">
+  			<h:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="registro.xhtml?faces-redirect=true" value="Registrarse"></h:commandButton>
+                        </h:form>
+                    <h:form class ="form-inline my-2 my-lg-0">
+  			<h:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="inicio-sesion.xhtml?faces-redirect=true" value="Iniciar Sesión"></h:commandButton>
+                        </h:form>
+  		</div>  
+	</nav>
+          <c:choose>
+              <c:when test="#{buscarPorTema.hayTema() and buscarPorTema.seBusco()}">
+    <h:form>
+    <p:accordionPanel>
+        <p:tab title="Tema Encontrado">
+            <h:panelGrid columns="2" cellpadding="10">
+                <div class="spinner-border text-success"></div>
+                 <h:outputText value="#{buscarPorTema.getT().get(0).getnombreT()}"></h:outputText> 
+                <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" value="MostrarMarcadores"></h:commandButton>
+                <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{buscarPorTema.seCancelo()}" value="Salir"></h:commandButton>
+            </h:panelGrid>
+        </p:tab>
+    </p:accordionPanel>
+</h:form>
+        </c:when>
+              <c:when test= "#{not buscarPorTema.hayTema() and buscarPorTema.seBusco()}">
+     <h:form>
+    <p:accordionPanel>
+        <p:tab title="Tema No Encontrado">
+            <h:panelGrid columns="2" cellpadding="10">
+                <div class="spinner-border text-success"></div>
+                 <h:outputText value="No se encontro el tema: "></h:outputText> 
+                <h:commandButton class ="btn btn-warning my-2 my-sm-o" type="submit"  action="#{buscarPorTema.seCancelo()}" value="Aceptar" />
+
+            </h:panelGrid>
+        </p:tab>
+    </p:accordionPanel>
+</h:form>
+              </c:when>
+  </c:choose>
+         </c:otherwise>
+     </c:choose>
+ <div class="container h-100">
+    <div class="row h-100">
+      <div class="col-lg-7 my-auto">
+          
+        <h1 class="mb-5">Comentaristas</h1> <br/>
+
+          <h:form id="myForm">
+         <h:dataTable value="#{comentarioC.obtenerComentaristas()}" var="dato" border="2" 
+                    cellspacing="1" cellpadding="1"> 
+         <h:column>
+         <r:facet name="header">idUsuario</r:facet>
+                 <h:outputText value="#{dato.id}" /> 
+         </h:column>
+         <h:column>
+         <r:facet name="header">Nombre</r:facet>
+                <h:outputText value="#{dato.nombre}"/>
+         </h:column>
+         <h:column>
+         <r:facet name="header">Correo</r:facet>
+                  <h:outputText value="#{dato.correo}" />
+         </h:column>
+         <h:column>
+         <r:facet name="header"> </r:facet>
+         <h:commandButton value="Registrar Informador" action="#{perfilC.registra(dato)}" >
+         </h:commandButton>
+         </h:column>
+       </h:dataTable>    
+        </h:form> 
+      </div>
+    </div>
+  </div>
+            
+        
+        
+    </h:body>
+</html>

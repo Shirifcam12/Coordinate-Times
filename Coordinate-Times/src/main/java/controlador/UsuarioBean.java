@@ -25,7 +25,7 @@ import org.primefaces.model.StreamedContent;
  * @author Luna Menguante
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class UsuarioBean {
     private Usuario usuario = new Usuario();
     static Usuario usuarioelimina = new Usuario();
@@ -57,14 +57,14 @@ public class UsuarioBean {
           Usuario u = utility.obtenUsuario(correo, contraseña);
         if (u != null) {
             if (!u.isActivo()) {
+                System.out.println(u.getCorreo());
                 FacesContext.getCurrentInstance()
                         .addMessage("loginGrowl",
                                 new FacesMessage(FacesMessage.SEVERITY_ERROR,
                                         "Error!", "Verificar correo de validación"));
+                return null;
             }
             FacesContext context = FacesContext.getCurrentInstance();
-            usuario1 = u;
-            usuarioelimina = u;
             context.getExternalContext().getSessionMap().put("usuario", u);
             return "principal.xhtml?faces-redirect=true";
         }
@@ -72,7 +72,7 @@ public class UsuarioBean {
                 .addMessage("loginGrowl",
                         new FacesMessage(FacesMessage.SEVERITY_ERROR,
                                 "Error!", "Error al iniciar sesión, verificar usuario y/o contraseña"));
-        return "";
+        return null;
     }
 /**
  * Método que devuelve el usuario para el caso de uso elimina usuario guardado en el bean
@@ -123,7 +123,6 @@ public class UsuarioBean {
         FacesContext context = FacesContext.getCurrentInstance();
         context.getExternalContext().invalidateSession();
         context.getExternalContext().redirect("principal.xhtml?faces-redirect=true");
-        return;
     }
 
     public String getCorreo() {
@@ -184,7 +183,7 @@ public class UsuarioBean {
     public StreamedContent getFotografia(){
         FacesContext context = FacesContext.getCurrentInstance();
         Usuario a = (Usuario) context.getExternalContext().getSessionMap().get("usuario");
-        if (a.getFotografia() != null) {
+        if (a.getImagen() != null) {
             return new ByteArrayContent(a.getFotografia());
         }
         return null;
