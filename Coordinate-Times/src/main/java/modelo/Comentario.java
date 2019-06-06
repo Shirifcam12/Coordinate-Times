@@ -141,28 +141,51 @@ public class Comentario {
         this.fecha = fecha;
     }
 
-    
+    /**
+     * Metodo que obtiene los me gusta del comentario
+     * @return gusta -- los me gusta del comentario
+     */
     public int getGusta() {
         return gusta;
     }
 
+    /**
+     * Metodo que asigna una nueva cantidad de me gusta al comentario
+     * @param gusta  -- la nueva cantidad
+     */
     public void setGusta(int gusta) {
         this.gusta = gusta;
     }
 
+    /**
+     * Metodo que obtiene los no me gusta del comentario
+     * @return nomegusta -- los no me gusta del comentario
+     */
     public int getNogusta() {
         return nogusta;
     }
 
+    /**
+     * Metodo que asigna la nueva cantidad de no me gusta al comentario
+     * @param nogusta -- la nueva cantidad
+     */
     public void setNogusta(int nogusta) {
         this.nogusta = nogusta;
     }
 
+    /**
+     * Metrodo que obtiene el total de me gusta y no me gusta del comentario
+     * @return total -- el total de me gusta y no me gusta
+     */
     public int getTotal() {
         total = gusta + nogusta;
         return total;
     }
 
+    /**
+     * Metodo que asigna un nuevo total al comentario
+     * @param total -- el nuevo total
+     */
     public void setTotal(int total) {
         this.total = total;
     }

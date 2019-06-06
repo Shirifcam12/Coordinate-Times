@@ -16,8 +16,9 @@ public class Utility {
     static Usuario userObj;
     static Session session;
 /**
- * Método que guarda un usuario en la base de datos
- * @param usuario el usuario a agregar
+ * Método que obtiene un usuario de la base de datos
+ * @param correo -- el correo del usuario
+ * @param password -- la contraseña del usuario
  */
 
     public Usuario obtenUsuario(String correo, String password) {
@@ -34,6 +35,10 @@ public class Utility {
         }
     }
 
+    /**
+     * Metodo que guarda un usuario en la base de datos
+     * @param usuario -- el usuario que vamos a guardar
+     */
     public void guardaUsuario(Usuario usuario) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
@@ -54,6 +59,10 @@ public class Utility {
             }
         }
     }
+    /**
+     * Metodo que actualiza un usuario en la base de datos
+     * @param usuario -- el usuario que vamos a actualizar
+     */
     public void actualizaUsuario(Usuario usuario) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
@@ -73,6 +82,11 @@ public class Utility {
         }
     }
 
+    /**
+     * Metodo que obtiene un usuario dado el hash el cual fue guardado
+     * @param hash -- el hash del usuario
+     * @return usuario -- el usuario que tiene el hash
+     */
     public Usuario obtenUsuario(String hash) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();

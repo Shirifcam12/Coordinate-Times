@@ -19,11 +19,11 @@ import modelo.Usuario;
 import modelo.UtilityC;
 import org.hibernate.Query;
 /**
- * Bean manejado para Mostrar comentarios 
+ * Bean manejado para realizar todas las funciones que tengan que ver con comentarios
  * @author Luna Menguante
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class comentarioC {
     private ArrayList<Comentario> c;
     private ArrayList<Usuario> comentaristas;
@@ -61,18 +61,34 @@ public class comentarioC {
         this.u = u;
     }
 
+    /**
+     * Metodo que obtiene el comentario 
+     * @return comentario -- el comentario escrito
+     */
     public Comentario getComentario() {
         return comentario;
     }
 
+    /**
+     * Metodo que asigna un nuevo comentario al comentario
+     * @param comentario -- el nuevo comentario
+     */
     public void setComentario(Comentario comentario) {
         this.comentario = comentario;
     }
 
+    /**
+     * Metodo que obtiene el comentario escrito del comentario
+     * @return comentariot -- el comentario escrito del comentario
+     */
     public String getComentariot() {
         return comentariot;
     }
 
+    /**
+     * Metodo que asigna un nuevo comentario escrito al comentario
+     * @param comentariot -- el nuevo comentario escrito del comentario
+     */
     public void setComentariot(String comentariot) {
         this.comentariot = comentariot;
     }
@@ -80,7 +96,7 @@ public class comentarioC {
 
     
 /**
- * Método constructor de la clase Mostrar comentarios
+ * Constructor por Omision del comentarioC.
  * 
  */
     public comentarioC() {
@@ -89,17 +105,22 @@ public class comentarioC {
                 .setLocale(new Locale("es-Mx"));
     }
 /**
- * Método que  nos ayuda a mostrar un comentario
- * @return el redireccionamiento resultado de la busqueda
+ * Método que  nos ayuda a mostrar todos los comentarios de un marcador
+ * @return c -- todos los comentarios del marcador
  */
    public ArrayList<Comentario> mostrarComentarios(int idm) {
-    Query query = HibernateUtil.getCurrentSession().createQuery("FROM Comentario c WHERE c.idMarcador = :idm");
+    Query query = HibernateUtil.getCurrentSession().createQuery("FROM Comentario c WHERE c.idMarcador = :idm ORDER BY c.total DESC");
     query.setParameter("idm", idm);
      c = (ArrayList<Comentario>) query.list();
      System.out.println(c);
     return c;     
    }
    
+   /**
+    * Metodo que agrega un comentario dado el identificador del marcador
+    * @param idm -- identificador del marcador
+    * @return al redireccionamiento a la pagina que contiene a los comentarios
+    */
     public String agregaComentario(int idm){
           if(!(ub.esComentarista())){
                  FacesContext.getCurrentInstance().addMessage(null,
@@ -124,16 +145,17 @@ public class comentarioC {
         return "resultado?faces-redirect=true";
 	}
         public String eliminaComentario(Comentario com){
-          if(!(ub.esComentarista())){
-                 FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "No dispones de permisos ", ""));        
-                }else{
-              		FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha eliminado correctamenten el Comentario", ""));
-                  u.eliminarC(com);
-		}
+        FacesContext.getCurrentInstance().addMessage(null,
+            new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha eliminado correctamenten el Comentario", ""));
+             u.eliminarC(com);		
         return "resultado?faces-redirect=true";
 	}
+        
+    /**
+     * Metodo que verifica si el comentario echo es de del usuario conectado actualmente
+     * @param id -- el identicador del usuario del comentario
+     * @return true -- si es su comentario , false -- en caso contrario
+     */
     public boolean suComentario(int id){
         int w = id;
         FacesContext context = FacesContext.getCurrentInstance();
@@ -144,7 +166,11 @@ public class comentarioC {
         }
         return false;
     }
-    
+  
+  /**
+   * Metodo que obtiene la lista de todos los que son comentaristas en la base de datos
+   * @return comentaristas -- todos los usuarios que son comentaristas
+   */
   public ArrayList<Usuario> obtenerComentaristas(){ 
     Query query = HibernateUtil.getCurrentSession().createQuery("FROM Usuario u WHERE u.tipo = '1'");
     comentaristas = (ArrayList<Usuario>) query.list();

@@ -32,8 +32,8 @@ public class HibernateUtil {
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
-     /**
-   * Método que abre una nueva sesión
+   /**
+   * Método que abre una nueva sesión.
    */
   public static void openSession() {
     session = sessionFactory.openSession();
@@ -52,7 +52,7 @@ public class HibernateUtil {
   }
  
   /**
-   * Método que cierra Hibernate
+   * Método que cierra Hibernate.
    */
   public static void closeSessionFactory() {
  

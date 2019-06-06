@@ -15,7 +15,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css" type="text/css"/>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
@@ -110,27 +109,54 @@
 	</nav>
         </c:otherwise>
         </c:choose>
- 	<h:form>
-    	<h1> Tu Perfil! </h1>
+        <h1> Tu Perfil! </h1>
         <p> <p:graphicImage value="#{usuarioBean.fotografia}"
                             width="250"
                             height="250"/> </p>
-        <p> Nombre del perfil: <h:inputText value="#{perfilC.nombre}"></h:inputText> <br></br>
-            Correo: <h:outputText value="#{usuarioBean.elUsuario().correo}"></h:outputText> <br></br>
-    	</p>
-      <table>
+        <h:form id="Editar" enctype="multipart/form-data">
+            <table>
                 <tr><td>
                         <p:messages id="messages" autoUpdate="true" closable="true" />
                     </td></tr>
             </table>
-       <tr>
-                    
-                    <td>
-                     <p:commandButton  value="Aplicar" action="#{perfilC.editaPerfil()}"/></td>
-                    <td>
-                     <p:commandButton  value="Cancelar" action="perfil.xhtml?faces-redirect=true"/></td>
-       </tr>
-	</h:form>
+            <table>
+                <tr>
+                    <td>Nuevo nombre:</td>
+                    <td><p:inputText value="#{perfilC.nombre}"
+                                     id="Username"
+                                     size="40"/></td>
+                </tr>
+                <tr>
+                    <td>Correo electrónico:</td>
+                    <td><h:outputText value="#{usuarioBean.elUsuario().correo}"
+                                     id="correo"
+                                     /></td>
+                </tr>
+                <tr>
+                    <td>Nueva contraseña:</td>
+                    <td><p:inputText value="#{perfilC.contraseña}"
+                          id="Password"/></td>
+                </tr>
+                <tr>
+                    <td>Nueva fotografia:</td>
+                    <td><p:fileUpload value="#{perfilC.fotografia}"
+                            mode="simple"
+                            skinSimple="true"
+                            fileUploadListener="#{perfilC.fileUploadListener}"/></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <p:commandButton action="#{perfilC.editaPerfil()}"
+                                         value="Aplicar"
+                                         ajax="false"/>
+                        <p:commandButton action="perfil.xhtml?faces-redirect=true"
+                                         value="Cancelar"
+                                         ajax="false"/>
+                    </td>
+                </tr>
+            </table>
+            <p:growl id="growl" showDetail="true" autoUpdate="true"/>
+        </h:form>
   </h:body>
   </f:view>
 </html>

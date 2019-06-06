@@ -82,15 +82,25 @@ public class Tema implements Serializable {
     public void setnombreT(String nombre){
         this.nombre = nombre;
     }
-
+/**
+ * Metodo que obtiene el color del tema
+ * @return  idC -- el color del tema
+ */
     public String getIdC() {
         return idC;
     }
-
+/**
+ * Metodo que asigna un nuevo color del tema al tema
+ * @param idC -- el nuevo color del tema
+ */
     public void setIdC(String idC) {
         this.idC = idC;
     }
+    
     @Override
+    /**
+     * Metodo toString del Tema.
+     */
     public String toString() {
         return nombre;
     }

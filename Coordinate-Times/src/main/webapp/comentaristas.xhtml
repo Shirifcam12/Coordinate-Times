@@ -15,7 +15,6 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <style>
@@ -68,27 +67,6 @@
                             height="48"/>
   		</div>  
 	</nav>
-              <c:choose>
-
-              <c:when test= "#{not buscarPorTema.hayTema() and buscarPorTema.seBusco()}">
-     <h:form>
-    <p:accordionPanel>
-        <p:tab title="Tema No Encontrado">
-            <h:panelGrid columns="2" cellpadding="10">
-                <div class="spinner-border text-success"></div>
-                 <h:outputText value="No se encontro el tema: "></h:outputText> 
-                 <c:when test="#{UsuarioBean.esInformador()}">
-                     <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{temaC.agregaTema()}" value="AgregarTema"></h:commandButton>
-                 </c:when>
-                <h:commandButton class ="btn btn-warning my-2 my-sm-o" type="submit"  action="#{buscarPorTema.seCancelo()}" value="Cancelar" />
-
-            </h:panelGrid>
-        </p:tab>
-    </p:accordionPanel>
-</h:form>
-              </c:when>
-  </c:choose>
-
           </c:when>
          <c:otherwise>
  	 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -128,36 +106,6 @@
                         </h:form>
   		</div>  
 	</nav>
-          <c:choose>
-              <c:when test="#{buscarPorTema.hayTema() and buscarPorTema.seBusco()}">
-    <h:form>
-    <p:accordionPanel>
-        <p:tab title="Tema Encontrado">
-            <h:panelGrid columns="2" cellpadding="10">
-                <div class="spinner-border text-success"></div>
-                 <h:outputText value="#{buscarPorTema.getT().get(0).getnombreT()}"></h:outputText> 
-                <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" value="MostrarMarcadores"></h:commandButton>
-                <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{buscarPorTema.seCancelo()}" value="Salir"></h:commandButton>
-            </h:panelGrid>
-        </p:tab>
-    </p:accordionPanel>
-</h:form>
-        </c:when>
-              <c:when test= "#{not buscarPorTema.hayTema() and buscarPorTema.seBusco()}">
-     <h:form>
-    <p:accordionPanel>
-        <p:tab title="Tema No Encontrado">
-            <h:panelGrid columns="2" cellpadding="10">
-                <div class="spinner-border text-success"></div>
-                 <h:outputText value="No se encontro el tema: "></h:outputText> 
-                <h:commandButton class ="btn btn-warning my-2 my-sm-o" type="submit"  action="#{buscarPorTema.seCancelo()}" value="Aceptar" />
-
-            </h:panelGrid>
-        </p:tab>
-    </p:accordionPanel>
-</h:form>
-              </c:when>
-  </c:choose>
          </c:otherwise>
      </c:choose>
  <div class="container h-100">
@@ -191,8 +139,5 @@
       </div>
     </div>
   </div>
-            
-        
-        
     </h:body>
 </html>

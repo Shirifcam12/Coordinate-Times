@@ -12,8 +12,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 /**
- *
- * @author LunaMenguante
+ * Clase para poder enviar correos
+ * @author Luna Menguante
  */
 public class EnviarEmail {
 
@@ -21,7 +21,13 @@ public class EnviarEmail {
     // https://myaccount.google.com/u/3/lesssecureapps
     private static final String SENDER = "lunamenguanteis1220@gmail.com";
     private static final String PASSWORD = "Reprobaremos";
-
+/**
+ * Metodo que envia un correo con un destinatario, un asunto y un contenido
+ * @param to -- el destinatario
+ * @param title -- El asunto del correo
+ * @param html -- El cuerpo del correo
+ * @throws MessagingException -- si ocurre una excepción al momento de enviar un correo
+ */
     public static void sendEmail(String to, String title, String html)
             throws MessagingException {
         Session session = createSession();
@@ -31,6 +37,10 @@ public class EnviarEmail {
         Transport.send(message);
     }
 
+    /**
+     * Metodo que abre la sesion de un correo
+     * @return PasswordAuthentication -- La session iniciada del correo con la contraseña
+     */
     private static Session createSession() {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -45,7 +55,14 @@ public class EnviarEmail {
         });
         return session;
     }
-
+    /**
+     * Metodo que crea el todo el contenido de un mensaje
+     * @param message -- el mensaje que le vamos a pasar
+     * @param to -- el destinatario el cual va dirigido
+     * @param title -- el asunto del correo
+     * @param html -- el cuerpo del correo
+     * @throws MessagingException 
+     */
     private static void prepareEmailMessage(MimeMessage message, String to, String title, String html)
             throws MessagingException {
         message.setContent(html, "text/html; charset=utf-8");

@@ -21,7 +21,7 @@ import modelo.Usuario;
 import modelo.UtilityC;
 import org.hibernate.Query;
 /**
- * Bean manejado para Mostrar comentarios 
+ * Bean manejado para realizar todas las funciones que tengan que ver con la calificación
  * @author Luna Menguante
  */
 @ManagedBean
@@ -32,13 +32,20 @@ public class calificacionC {
     private Calificacion calificacion = new Calificacion();
     private UsuarioBean ub = new UsuarioBean();
 
-
+/**
+ * Constructor por omision de calificacionC.
+ */
     public calificacionC() {
         FacesContext.getCurrentInstance()
                 .getViewRoot()
                 .setLocale(new Locale("es-Mx"));
     }
-    
+   /**
+    * Metodo que califica un comentario
+    * @param comentario -- El comentario que va a ser calificado
+    * @param b -- true si es me gusta, false si es no me gusta
+    * @return redireccionamiento con el comentario ya calificado
+    */
     public String calificaComentarios(Comentario comentario,Boolean b){
         Usuario usuario = ub.elUsuario();
         if(u.mostrarCalificaciones(comentario.getIdComentario(),usuario.getId()).isEmpty()){

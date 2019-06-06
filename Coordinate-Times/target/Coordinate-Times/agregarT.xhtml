@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+    xmlns:b="http://bootsfaces.net/ui">
+    
+    <h:head>
+          <title>Coordinate Times</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css" type="text/css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
+    </h:head>
+    <h:body>
+ 	<c:choose>
+          <c:when test="#{usuarioBean.estaConectado()}">
+              <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  		<h:form class="form-inline my-2 my-lg-0" >
+                    <h:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="principal.xhtml?faces-redirect=true" value = "Principal"></h:commandButton>
+  	        </h:form>
+	  	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    		<span class="navbar-toggler-icon"></span>
+  		</button>
+  		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+  	  		<ul class="navbar-nav mr-auto">
+      			<li class="nav-item">
+        			<a class="nav-link" href="#">Link</a>
+      			</li>
+      			<li class="nav-item">
+        			<a class="nav-link" href="#">Link</a>
+    	  		</li>
+      			<li class="nav-item">
+        			<a class="nav-link" href="#">Link</a>
+	      		</li>    
+    		</ul>
+                <h:form class="form-inline my-2 my-lg-0" >
+                    <p:inputText type="search" value="#{buscarPorTema.nombre}"/>
+                         
+                            <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{buscarPorTema.buscarTema()}" value="BuscarTema"></h:commandButton>
+                    </h:form>
+                    <h:form class="form-inline my-2 my-lg-0" >
+                    <p:inputText type="search" value="#{buscarPorPerfil.correo}"/>
+                         
+                            <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{buscarPorPerfil.buscarPerfil()}" value="BuscarPerfil"></h:commandButton>
+                    </h:form>    
+                    <h:form class ="form-inline my-2 my-lg-0">
+  			<h:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="perfil.xhtml?faces-redirect=true" value="Perfil"></h:commandButton>
+                        </h:form>
+                    <h:form class ="form-inline my-2 my-lg-0">
+  			<h:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="#{usuarioBean.cerrarSesion()}" value="Cerrar Sesión"></h:commandButton>
+                        </h:form>
+               <p:graphicImage value="#{usuarioBean.fotografia}"
+                            width="58"
+                            height="58"/>
+  		</div>  
+	</nav>
+          </c:when>
+        <c:otherwise>
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  		<h:form class="form-inline my-2 my-lg-0" >
+                    <h:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="principal.xhtml?faces-redirect=true" value = "Principal"></h:commandButton>
+  	        </h:form>
+	  	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    		<span class="navbar-toggler-icon"></span>
+  		</button>
+  		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+  	  		<ul class="navbar-nav mr-auto">
+      			<li class="nav-item">
+        			<a class="nav-link" href="#">Link</a>
+      			</li>
+      			<li class="nav-item">
+        			<a class="nav-link" href="#">Link</a>
+    	  		</li>
+      			<li class="nav-item">
+        			<a class="nav-link" href="#">Link</a>
+	      		</li>    
+    		</ul>
+                <h:form class="form-inline my-2 my-lg-0" >
+                    <p:inputText type="search" value="#{buscarPorTema.nombre}"/>
+                         
+                            <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{buscarPorTema.buscarTema()}" value="BuscarTema"></h:commandButton>
+                    </h:form>
+                    <h:form class="form-inline my-2 my-lg-0" >
+                    <p:inputText type="search" value="#{buscarPorPerfil.correo}"/>
+                         
+                            <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{buscarPorPerfil.buscarPerfil()}" value="BuscarPerfil"></h:commandButton>
+                    </h:form>
+                    <h:form class ="form-inline my-2 my-lg-0">
+  			<h:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="registro.xhtml?faces-redirect=true" value="Registrarse"></h:commandButton>
+                        </h:form>
+                    <h:form class ="form-inline my-2 my-lg-0">
+  			<h:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="inicio-sesion.xhtml?faces-redirect=true" value="Iniciar Sesión"></h:commandButton>
+                        </h:form>
+  		</div>  
+	</nav>
+        </c:otherwise>
+        </c:choose>    
+<h:form>
+    <h:outputText value="Seleccione el color que desee que tenga su tema:"/>
+    <p:colorPicker value ="#{temaC.color}" mode="inline"/>
+    <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{temaC.agregaTema()}" value="AgregarTema"></h:commandButton>
+    
+</h:form>
+    </h:body>
+</html>

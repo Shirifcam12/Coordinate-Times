@@ -44,24 +44,41 @@ public class RegisterController {
     public void setUser(Usuario user) {
         this.user = user;
     }
+    
+/**
+ * Metodo que obtiene la confirmacion de la contraseña
+ * @return confirmacionPassword -- la confirmacion de la contraseña
+ */
     public String getConfirmacionPassword() {
         return confirmacionPassword;
     }
 
+    /**
+     * Metodo que asigna una nueva confirmacion de contraseña del usuario
+     * @param confirmacionPassword  -- la nueva confirmacion de la contraseña
+     */
     public void setConfirmacionPassword(String confirmacionPassword) {
         this.confirmacionPassword = confirmacionPassword;
     }
 
+    /**
+     * Metodo que obtiene la fotografia del usuario 
+     * @return fotografia -- la fotografia del usuario
+     */
     public UploadedFile getFotografia() {
         return fotografia;
     }
 
+    /**
+     * Metodo que asigna una nueva fotografia al usuario
+     * @param fotografia -- la nueva fotografia del usuario
+     */
     public void setFotografia(UploadedFile fotografia) {
         this.fotografia = fotografia;
     }
     
 /**
- * Método constructor de la clase RegisterController
+ * Constructor por Omision del RegisterController
  * 
  */
     public RegisterController() {
@@ -107,6 +124,12 @@ public class RegisterController {
         return "registro.xhtml?faces-redirect=true";
     
 }
+    
+    /**
+     * Metodo que nos ayuda hashear los datos de un usuario
+     * @param entrada -- los datos del usuario
+     * @return los datos del usuario hasheados
+     */
         public static String md5(String entrada) {
         try {
             char[] CONSTS_HEX = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};

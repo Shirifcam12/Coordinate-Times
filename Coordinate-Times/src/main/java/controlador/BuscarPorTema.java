@@ -27,7 +27,8 @@ public class BuscarPorTema {
     private UtilityT u = new UtilityT();
     static int a;
     static String nombreg;
-    /**
+    
+/**
  * Método que devuelve la lista de temas guardados en el bean
  * @return La lista de usuarios almacenada en el bean
  */
@@ -35,24 +36,38 @@ public class BuscarPorTema {
         return t;
     }
     
+/**
+ * Método estatico que asgina una nueva arraylist de temas en el bean
+ * @param t -- nueva arraylist de temas
+ * @return null
+ */
     public static ArrayList<Tema> setT(ArrayList<Tema> t){
         BuscarPorTema.t = t;
         return null;
     }
-    
+/**
+ * Metodo statico que obtiene el nombre del tema que se busco para utilizarlo en otras clases
+ * @return nombreg -- el nombre del tema que fue buscado
+ */
     public static String getNombreg(){
         return nombreg;
     }
-
+/**
+ * Metodo que obtiene un entero a, que sirve para hacer validaciones
+ * @return a -- el entero para hacer validaciones
+ */
     public int getA() {
         return a;
     }
-
+    
+/**
+ * Metodo que asigna un entero nuevo, al entero que hace las validaciones en el bean
+ * @param a  -- el nuevo entero
+ */
     public void setA(int a) {
         this.a = a;
     }
     
-
 /**
  * Método que devuelve la instancia de UtilityT guardada en el bean
  * @return La instancia de UtilityT almacenada en el bean
@@ -82,7 +97,7 @@ public class BuscarPorTema {
         this.nombre = nombre;
     }
 /**
- * Método constructor de la clase BuscarConTema
+ * Constructor por Omision de BuscarPorTema
  * 
  */
     public BuscarPorTema() {
@@ -91,14 +106,15 @@ public class BuscarPorTema {
                 .getViewRoot()
                 .setLocale(new Locale("es-Mx"));
     }
+    
 /**
  * Método que  cubre el caso de uso Buscar Tema
- * @return el redireccionamiento resultado de la busqueda
+ * @return el redireccionamiento con resultado de la busqueda
  */
     public String buscarTema() {
         a=0;
         nombreg = nombre;
-        t = u.buscarTema(nombre);
+        t = u.buscarTema(nombre.toUpperCase());
         if(nombre == "" ){
             return "principal?faces-redirect=true";
         }
@@ -113,16 +129,31 @@ public class BuscarPorTema {
         }
         
     }
+    
+    /**
+     * Metodo que cancela la busqueda que fue realizada
+     * @return el redireccionamiento hacia la pagina principal
+     */
     public String seCancelo() { 
         a=0;
+        MarcadoresController.a = false;
        return "principal?faces-redirect=true";
     }
     
+    /**
+     * Metodo statico que cancela la busqueda que fue realizada
+     * @return el redireccionamiento hacia la pagina principal
+     */
     public static String seCancelo1(){
         a=0;
+        MarcadoresController.a = false;
         return "principal?faces-redirect=true";
     }
     
+    /**
+     * Metodo que verifica que si se encontro algo al momento de realizar la busqueda
+     * @return true -- si se encontro, false -- en  otro caso
+     */
     public boolean hayTema(){
         if(t.isEmpty()){
             return false;
@@ -130,6 +161,10 @@ public class BuscarPorTema {
         return true;
     }
     
+    /**
+     * Metodo que verifica que si se realizo alguna busqueda
+     * @return false -- si no se realizó, true -- en caso contrario
+     */
     public boolean seBusco(){
         if(a==0){
             return false;

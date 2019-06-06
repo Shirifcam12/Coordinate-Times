@@ -15,7 +15,7 @@ import org.hibernate.Session;
 
 
 /**
- * Clase que nos ayuda a buscar temas y a buscar perfiles
+ * Clase que nos ayuda a las operaciones con la base de datos del Tema
  * @author Luna Menguante
  */
 public class UtilityT {
@@ -47,6 +47,10 @@ public class UtilityT {
             return usuarios;
         }
         
+        /**
+         * Metodo que obtiene todos los temas de la base de datos
+         * @return la lsita con todos los temas.
+         */
        public List<Tema> obtenTemas() {
         try {
             session = HibernateUtil.getSessionFactory().openSession();

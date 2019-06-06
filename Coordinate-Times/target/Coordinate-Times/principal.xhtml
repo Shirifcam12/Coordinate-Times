@@ -14,7 +14,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css" type="text/css"/>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
@@ -47,15 +46,15 @@
 	      		</li>    
     		</ul>
                  
-                    <h:form class="form-inline my-2 my-lg-0" >
+                    <h:form class="form-inline my-2 my-lg-0"  id="BuscarTema" >
                     <p:inputText type="search" value="#{buscarPorTema.nombre}"/>
                          
-                            <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{buscarPorTema.buscarTema()}" value="BuscarTema"></h:commandButton>
+                            <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{buscarPorTema.buscarTema()}" value="BuscarTema"><p:resetInput target= "BuscarTema" /></h:commandButton>
                     </h:form>
-                    <h:form class="form-inline my-2 my-lg-0" >
+                    <h:form class="form-inline my-2 my-lg-0"  id="BuscarPerfil" >
                     <p:inputText type="search" value="#{buscarPorPerfil.correo}"/>
                          
-                            <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{buscarPorPerfil.buscarPerfil()}" value="BuscarPerfil"></h:commandButton>
+                            <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{buscarPorPerfil.buscarPerfil()}" value="BuscarPerfil"><p:resetInput target= "BuscarPerfil" /></h:commandButton>
                     </h:form>
                     <h:form class ="form-inline my-2 my-lg-0">
   			<h:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="perfil.xhtml?faces-redirect=true" value="Perfil"></h:commandButton>
@@ -76,16 +75,12 @@
             <h:panelGrid columns="2" cellpadding="10">
                 <div class="spinner-border text-success"></div>
                  <h:outputText value="#{buscarPorTema.getT().get(0).getnombreT()}"></h:outputText> 
-                <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" value="MostrarMarcadores"></h:commandButton>
-                <c:when test="#{UsuarioBean.esInformador()}">
+                 <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{marcadoresController.mostrarMarcadores()}" value="MostrarMarcadores"></h:commandButton>
                 <h:panelGrid>
-                 <h:outputText value="Para agregar Marcador seleccione el mapa y automaticamente podra agregar un marcador"/>
-                 <h:outputText value="Para  Eliminar marcador seleccione el marcador en el mapa y estara la opción"/> 
+                 <h:outputText rendered ="#{usuarioBean.esInformador()}" value="Para agregar Marcador seleccione el mapa y automaticamente podra agregar un marcador"/>
+                 <h:outputText rendered ="#{usuarioBean.esInformador()}" value="Para  Eliminar marcador seleccione el marcador en el mapa y estara la opción"/> 
                  </h:panelGrid>
-                </c:when>
-                <c:when test="#{UsuarioBean.esInformador() or UsuarioBean.esAdministrador()}">
-                 <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{temaC.eliminaTema()}" value="EliminarTema"></h:commandButton>       
-            </c:when>
+                 <h:commandButton rendered ="#{usuarioBean.esInformador() or usuarioBean.esAdministrador()}" class="btn btn-warning my-2 my-sm-0" type="submit" action="#{temaC.eliminaTema()}" value="EliminarTema"></h:commandButton>       
                 <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{buscarPorTema.seCancelo()}" value="Salir"></h:commandButton>
             </h:panelGrid>
         </p:tab>
@@ -99,11 +94,8 @@
             <h:panelGrid columns="2" cellpadding="10">
                 <div class="spinner-border text-success"></div>
                  <h:outputText value="No se encontro el tema: "></h:outputText> 
-                 <c:when test="#{UsuarioBean.esInformador()}">
-                     <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{temaC.agregaTema()}" value="AgregarTema"></h:commandButton>
-                 </c:when>
+                 <h:commandButton rendered ="#{usuarioBean.esInformador()}" class="btn btn-warning my-2 my-sm-0" type="submit" action="agregarT.xhtml?faces-redirect=true" value="AgregarTema"></h:commandButton>
                 <h:commandButton class ="btn btn-warning my-2 my-sm-o" type="submit"  action="#{buscarPorTema.seCancelo()}" value="Cancelar" />
-
             </h:panelGrid>
         </p:tab>
     </p:accordionPanel>
@@ -112,16 +104,15 @@
   </c:choose>
         <h1>Bienvenido  <h:outputLabel value="#{usuarioBean.elUsuario().nombre}"/> </h1>
         <c:choose>
-            <c:when test = "#{buscarPorTema.hayTema() and buscarPorTema.seBusco()}">
+        <c:when test = "#{buscarPorTema.hayTema() and buscarPorTema.seBusco()}">
         <h:form prependId="false">
-              <p:gmap center="19.323808, -99.178948" zoom="17"
+            <p:gmap rendered="#{usuarioBean.esInformador()}" center="19.323808, -99.178948" zoom="17"
                       type="TERRAIN" style="width:100%;height:600px"
                       model="#{marcadoresController.model}"
                       
                       onPointClick="handlePointClick(event);" widgetVar="map"
                       id="adminorinformer"
-                      >
-                      
+                      >     
                 <p:ajax event="overlaySelect" listener="#{marcadoresController.onMarkerSelect}" />
                 <p:gmapInfoWindow id="infoWindow" >
                   <p:outputPanel style="text-align: left; display: block; margin: auto">
@@ -133,6 +124,27 @@
                     <h:form>
                       <h:inputHidden value="#{marcadoresController.title}"/>
                       <h:commandButton value="Eliminar marcador" action="#{marcadoresController.eliminaMarcador}"/>
+                      <h:commandButton value="VerDetalles" action= "resultado.xhtml?faces-redirect=true" />
+                    </h:form>
+                  </p:outputPanel>
+                </p:gmapInfoWindow>
+              </p:gmap>
+             <p:gmap rendered ="#{not usuarioBean.esInformador()}" center="19.323808, -99.178948" zoom="17"
+                      type="TERRAIN" style="width:100%;height:600px"
+                      model="#{marcadoresController.model}"
+                      onPointClick="" widgetVar="map"
+                      id="adminorinformer1"
+               >
+                <p:ajax event="overlaySelect" listener="#{marcadoresController.onMarkerSelect}" />
+                <p:gmapInfoWindow id="infoWindow1" >
+                  <p:outputPanel style="text-align: left; display: block; margin: auto">
+                    <h3><p:outputLabel value="#{marcadoresController.title}" /></h3>
+                    <br/>
+                    <p:outputLabel value="${marcadoresController.data}" /><br/>
+                    <br/>
+                    <p:outputLabel value="${marcadoresController.getId()}" /><br/>
+                    <h:form>
+                      <h:inputHidden value="#{marcadoresController.title}"/>
                       <h:commandButton value="VerDetalles" action= "resultado.xhtml?faces-redirect=true" />
                     </h:form>
                   </p:outputPanel>
@@ -164,7 +176,8 @@
                 </p:gmapInfoWindow>
               </p:gmap>
             </h:form>    
-            </c:otherwise></c:choose>
+            </c:otherwise>
+        </c:choose>
         <p:dialog header="Agrega un nuevo marcador" widgetVar="dialog"
                       showEffect="fade" id="dialog" modal="true"
                       closable="false" draggable="false" resizable="false">
@@ -206,15 +219,15 @@
         			<a class="nav-link" href="#">Link</a>
 	      		</li>    
     		</ul>
-                    <h:form class="form-inline my-2 my-lg-0" >
+                    <h:form class="form-inline my-2 my-lg-0"  id="BuscarTema" >
                     <p:inputText type="search" value="#{buscarPorTema.nombre}"/>
                          
-                            <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{buscarPorTema.buscarTema()}" value="BuscarTema"></h:commandButton>
+                            <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{buscarPorTema.buscarTema()}" value="BuscarTema"> <p:resetInput target= "BuscarTema" /></h:commandButton>
                     </h:form>
-                    <h:form class="form-inline my-2 my-lg-0" >
+                    <h:form class="form-inline my-2 my-lg-0"  id="BuscarPerfil">
                     <p:inputText type="search" value="#{buscarPorPerfil.correo}"/>
                          
-                            <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{buscarPorPerfil.buscarPerfil()}" value="BuscarPerfil"></h:commandButton>
+                            <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{buscarPorPerfil.buscarPerfil()}" value="BuscarPerfil"> <p:resetInput target= "BuscarPerfil" /></h:commandButton>
                     </h:form>
                     <h:form class ="form-inline my-2 my-lg-0">
   			<h:commandButton class="btn btn-success my-2 my-sm-0" type="submit" action="registro.xhtml?faces-redirect=true" value="Registrarse"></h:commandButton>
@@ -232,7 +245,7 @@
             <h:panelGrid columns="2" cellpadding="10">
                 <div class="spinner-border text-success"></div>
                  <h:outputText value="#{buscarPorTema.getT().get(0).getnombreT()}"></h:outputText> 
-                <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" value="MostrarMarcadores"></h:commandButton>
+                <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{marcadoresController.mostrarMarcadores()}" value="MostrarMarcadores"></h:commandButton>
                 <h:commandButton class="btn btn-warning my-2 my-sm-0" type="submit" action="#{buscarPorTema.seCancelo()}" value="Salir"></h:commandButton>
             </h:panelGrid>
         </p:tab>

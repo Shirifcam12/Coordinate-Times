@@ -32,6 +32,7 @@ public class UsuarioBean {
     static Usuario usuario1;
     private String correo;
     private String contraseña;
+    private static String contraseña1;
     private final Utility utility = new Utility();
 
 /**
@@ -48,26 +49,38 @@ public class UsuarioBean {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
 /**
  * Método que revisa si los datos ingresados en el caso de uso iniciar sesión son correctos
  * @return null si el inicio de sesión es correcto y un mensaje de error en otro caso
  * @throws Exception Error alguna parte del inicio de sesión
  */
     public String inicioSesion() throws Exception{ 
+          contraseña1 = contraseña;
           Usuario u = utility.obtenUsuario(correo, contraseña);
         if (u != null) {
             if (!u.isActivo()) {
-                System.out.println(u.getCorreo());
+                
                 FacesContext.getCurrentInstance()
                         .addMessage("loginGrowl",
                                 new FacesMessage(FacesMessage.SEVERITY_ERROR,
                                         "Error!", "Verificar correo de validación"));
                 return null;
             }
+            if(!u.getCorreo().equals(correo)){
+                
+                 FacesContext.getCurrentInstance()
+                .addMessage("loginGrowl",
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                "Error!", "Error al iniciar sesión, verificar usuario y/o contraseña"));
+               return null;
+                
+            }
             FacesContext context = FacesContext.getCurrentInstance();
             context.getExternalContext().getSessionMap().put("usuario", u);
             return "principal.xhtml?faces-redirect=true";
         }
+        
         FacesContext.getCurrentInstance()
                 .addMessage("loginGrowl",
                         new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -125,27 +138,52 @@ public class UsuarioBean {
         context.getExternalContext().redirect("principal.xhtml?faces-redirect=true");
     }
 
+    /**
+     * Metodo que obtiene el correo del usuario
+     * @return corre -- el correo del usuario
+     */
     public String getCorreo() {
         return correo;
     }
 
+    /**
+     * Metodo que asigna un nuevo correo al usuario
+     * @param correo -- el nuevo correo del usuario
+     */
     public void setCorreo(String correo) {
         this.correo = correo;
     }
 
+    /**
+     * Metodo que obtiene la contraseña del Usuario
+     * @return contraseña -- la contraseña del usuario
+     */
     public String getContraseña() {
         return contraseña;
     }
 
+    /**
+     * Metodo que asigna una nueva contraseña al Usuario
+     * @param contraseña -- la nueva contraseña del usuario
+     */
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
     
+    /**
+     * Metodo que revisa si un usuario esta conectado
+     * @return true -- si esta conectado, false-- en otro caso
+     */
     public boolean estaConectado (){
         FacesContext context = FacesContext.getCurrentInstance();
         Usuario a = (Usuario) context.getExternalContext().getSessionMap().get("usuario");
         return a != null;
     }
+    
+    /**
+     * Metodo que revisa si un usuario conectado es administrador
+     * @return true -- si es administrador, false -- en otro caso
+     */
     public boolean esAdministrador (){
         FacesContext context = FacesContext.getCurrentInstance();
         Usuario a = (Usuario) context.getExternalContext().getSessionMap().get("usuario");
@@ -155,6 +193,11 @@ public class UsuarioBean {
         }
         return false;   
     }
+    
+    /**
+     * Metodo que revisa si un usuario conectado es comentarista
+     * @return true -- si es comentarista, false -- en otro caso
+     */
        public boolean esComentarista (){
         FacesContext context = FacesContext.getCurrentInstance();
         Usuario a = (Usuario) context.getExternalContext().getSessionMap().get("usuario");
@@ -164,7 +207,12 @@ public class UsuarioBean {
         }
         return false;   
     }
-          public boolean esInformador (){
+       
+    /**
+     * Metodo que revisa si un usuario conectado es informador
+     * @return true -- si es informador, false -- en otro caso
+     */   
+      public boolean esInformador (){
         FacesContext context = FacesContext.getCurrentInstance();
         Usuario a = (Usuario) context.getExternalContext().getSessionMap().get("usuario");
         if(a==null) return false;
@@ -174,12 +222,20 @@ public class UsuarioBean {
         return false;   
     }
     
+      /**
+       * Metodo que obtiene el usuario Conectado
+       * @return a -- el usuario que se encuentra conectado
+       */
     public Usuario elUsuario(){
         FacesContext context = FacesContext.getCurrentInstance();
         Usuario a = (Usuario) context.getExternalContext().getSessionMap().get("usuario");
         return a;
     }
     
+    /**
+     * Metodo que obtiene la fotografia del usuario que esta conectado.
+     * @return a -- la fotografia del usuario conectado
+     */
     public StreamedContent getFotografia(){
         FacesContext context = FacesContext.getCurrentInstance();
         Usuario a = (Usuario) context.getExternalContext().getSessionMap().get("usuario");

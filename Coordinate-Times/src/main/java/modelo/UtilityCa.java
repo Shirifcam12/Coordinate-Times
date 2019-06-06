@@ -12,20 +12,32 @@ import org.hibernate.Session;
 
 
 /**
- * Clase que nos ayuda a mostrar los comentarios 
+ * Clase que nos ayuda a las operaciones de la base de datos con las Calificaciones
  * @author Luna Menguante
  */
 public class UtilityCa {
     static Session session;
 
+    /**
+     * Metodo que obtiene la session
+     * @return session
+     */
     public static Session getSession() {
         return session;
     }
 
+    /**
+     * Metodo que asigna una nueva session
+     * @param session -- la nueva session
+     */
     public static void setSession(Session session) {
         UtilityCa.session = session;
     }
 
+    /**
+     * Metodo que actualiza una calificacion
+     * @param ca -- la calificacion que vamos a actualizar
+     */
     public void actualizaCalificacion(Calificacion ca) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
@@ -44,6 +56,11 @@ public class UtilityCa {
             }
         }
     }
+    
+    /**
+     * Metodo que guarda una calificacion en la base de datos
+     * @param ca -- calificacion
+     */
     public void guardaCalificacion(Calificacion ca) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
@@ -62,6 +79,11 @@ public class UtilityCa {
             }
         }
     }
+    
+    /**
+     * Metodo que elimina una calificacion de la base de datos
+     * @param ca -- calificacion a eliminar
+     */
     public void eliminaCalificacion(Calificacion ca) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
@@ -80,6 +102,13 @@ public class UtilityCa {
             }
         }
     }
+    
+    /**
+     * Metodo que muestra las calificaciones dado un identificador del comentario, y del identificador del Usuario
+     * @param idc -- identificador del comentario
+     * @param idu -- identificador del usuario
+     * @return calificaciones -- las calificaciones 
+     */
     public ArrayList<Calificacion> mostrarCalificaciones(int idc,int idu){ 
         Query query = HibernateUtil.getCurrentSession().createQuery("FROM Calificacion c WHERE c.idComentario = :idc AND c.idUsuario = :idu");
         query.setParameter("idc", idc);

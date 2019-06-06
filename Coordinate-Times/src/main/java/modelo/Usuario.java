@@ -127,10 +127,18 @@ public class Usuario {
         }
     }
 
+    /**
+     * Metodo que obtiene la fotografia del usuario
+     * @return fotografia -- la forografia del usuario
+     */
     public byte[] getFotografia() {
         return fotografia;
     }
     
+    /**
+     * Metodo que muestra el contenido de una imagen
+     * @return el contenido de la fotografia
+     */
     public StreamedContent getImagen(){
         if (fotografia != null) {
             return new ByteArrayContent(fotografia);
@@ -138,31 +146,60 @@ public class Usuario {
         return null;
     }
 
+    /**
+     * Metodo que asigna una nueva fotografia al Usuario
+     * @param fotografia -- fotografia nueva del Usuario
+     */
     public void setFotografia(byte[] fotografia) {
         this.fotografia = fotografia;
     }
 
+    /**
+     * Metodo que obtiene si esta activo el usuario
+     * @return activo -- el valor activo del usuario
+     */
     public boolean isActivo() {
         return activo;
     }
 
+    /**
+     * Metodo que asigna un nuevo valor de activo al usuario
+     * @param activo -- el nuevo valor de activo del usuario
+     */
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
 
+    /**
+     * Metodo que obtiene la activación del usuario
+     * @return activacion -- la activación del usuario
+     */
     public String getActivacion() {
         return activacion;
     }
 
+    /**
+     * Metodo que asigna una nueva activación al usuario
+     * @param activacion -- la nueva activación del usuario
+     */
     public void setActivacion(String activacion) {
         this.activacion = activacion;
     }
 
+    /**
+     * Metodo que obtiene la contraseña del usuario
+     * @return contraseña -- la contraseña del usuario
+     */
     public String getContraseña() {
         return contraseña;
     }
 
+    /**
+     * Metodo que asigna una nueva contraseña al usuario
+     * @param contraseña -- la nueva contraseña del usuario
+     */
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
+    
 }

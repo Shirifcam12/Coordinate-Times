@@ -11,12 +11,15 @@ import modelo.Usuario;
 import modelo.Utility;
 
 /**
- *
+ * Clase que realiza la valifación de un correo electronico
  * @author Luna Menguante
  */
 public class Validacion extends HttpServlet {
 
     @Override
+    /**
+     * Metodo que valida el correo de un usuario.
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String hash = request.getParameter("val");

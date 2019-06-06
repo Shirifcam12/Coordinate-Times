@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package modelo;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.HibernateException;
@@ -12,10 +13,10 @@ import org.hibernate.Session;
 
 
 /**
- * Clase que nos ayuda a mostrar los marcadores
+ * Clase que nos ayuda con las operaciones de la base de datos con los Marcadores
  * @author Luna Menguante
  */
-public class UtilityM {
+public class UtilityM implements Serializable {
      static Tema temaObj;
      static Session sessionObj;
      static Session session;
@@ -30,6 +31,10 @@ public ArrayList<Marcador> MostrarMarcadores(String tema){
     ArrayList<Marcador> marcadores = (ArrayList<Marcador>) query.list();
     return marcadores;
 }
+/**
+ * Metodo que obtiene todos los Marcadores
+ * @return la lista con todos los marcadores
+ */
     public List<Marcador> obtenMarcadores() {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
@@ -41,6 +46,11 @@ public ArrayList<Marcador> MostrarMarcadores(String tema){
             }
         }
     }
+    
+    /**
+     * Metodo que guarda un marcador en la base de datos
+     * @param m -- marcador que vamos a guardar
+     */
     public void guardaMarcador(Marcador m) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
@@ -59,6 +69,11 @@ public ArrayList<Marcador> MostrarMarcadores(String tema){
             }
         }
     }
+    
+    /**
+     * Metodo que elimina un marcador dado un titulo de la base de datos
+     * @param titulo -- titulo del marcador
+     */
         public void eliminaMarcadorPorTitulo(String titulo) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
@@ -70,6 +85,12 @@ public ArrayList<Marcador> MostrarMarcadores(String tema){
             }
         }
     }
+    
+        /**
+         * Metodo que busca un marcador por un titulo
+         * @param titulo -- el titulo del marcador
+         * @return el marcador que tiene el titulo
+         */
        public Marcador buscarMarcadorPorTitulo(String titulo) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();

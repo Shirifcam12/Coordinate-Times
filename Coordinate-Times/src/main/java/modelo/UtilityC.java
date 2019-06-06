@@ -12,7 +12,7 @@ import org.hibernate.Session;
 
 
 /**
- * Clase que nos ayuda a mostrar los comentarios 
+ * Clase que nos ayuda a las operaciones con la base de datos de los Comentarios
  * @author Luna Menguante
  */
 public class UtilityC {
@@ -20,7 +20,7 @@ public class UtilityC {
     static Session session;
     /**
      * Método que nos ayuda a obtener los comentarios almacenados en la base de datos dado un id
-     * @param id- el id que nos ayuda a buscar en la base
+     * @param id- el id del marcador
      * @return un Arraylist con los comentarios de la base dado el id 
      */
 public ArrayList<Comentario> mostrarComentarios(int id){ 
@@ -29,12 +29,22 @@ public ArrayList<Comentario> mostrarComentarios(int id){
     ArrayList<Comentario> comentarios = (ArrayList<Comentario>) query.list();
     return comentarios;
 } 
+/**
+ * Metodo que obtiene los marcadores en la base de datos dado un id
+ * @param id -- id del maracador
+ * @return un ArrayList con los marcadores de la base de datos
+ */
 public ArrayList<Marcador> mostrarMarcador(int id){ 
     Query query = HibernateUtil.getCurrentSession().createQuery("FROM Marcador c WHERE c.idMarcador = :id");
     query.setParameter("id", id);
     ArrayList<Marcador> comentarios = (ArrayList<Marcador>) query.list();
     return comentarios;
 }  
+
+/** 
+ * Metodo que guarda un comentario en la base de datos
+ * @param m -- el comentario a guardar
+ */
     public void guardaComentario(Comentario m) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
@@ -53,6 +63,11 @@ public ArrayList<Marcador> mostrarMarcador(int id){
             }
         }
     }
+    
+    /**
+     * Metodo que elimina un comentario de la base de datos
+     * @param comentario -- comentario que vamos a eliminar
+     */
         public void eliminarC(Comentario comentario){
         try {
             session = HibernateUtil.getSessionFactory().openSession();
@@ -71,6 +86,11 @@ public ArrayList<Marcador> mostrarMarcador(int id){
             }
         }
     }
+        
+        /**
+         * Metodo que actualiza un comentario
+         * @param comentario -- el comentario que vamos a actualizar
+         */
     public void actualizaComentario(Comentario comentario) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();

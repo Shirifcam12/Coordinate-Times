@@ -60,6 +60,10 @@ public class Base{
         }
     }
     
+    /**
+     * Metodo que agrega un tema al la base de datos
+     * @param tema  -- el tema que vamos a agregar
+     */
       public void agregarTema(Tema tema) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
@@ -79,6 +83,11 @@ public class Base{
             }
         }
     }
+      
+      /**
+       * Metodo que edita el usuario que se encuentra en la base de datos
+       * @param usuario -- el usuario que vamos a editar
+       */
     public void editaU(Usuario usuario){
         try {
             session = HibernateUtil.getSessionFactory().openSession();

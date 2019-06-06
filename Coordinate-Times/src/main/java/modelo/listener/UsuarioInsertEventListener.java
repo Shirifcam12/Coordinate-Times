@@ -17,8 +17,8 @@ import org.hibernate.event.spi.PostInsertEventListener;
 import org.hibernate.persister.entity.EntityPersister;
 
 /**
- *
- * @author miguel
+ * Clase que envia el correo al usuario que se registro
+ * @author Luna Menguante
  */
 public class UsuarioInsertEventListener implements PostInsertEventListener {
 
@@ -35,6 +35,10 @@ public class UsuarioInsertEventListener implements PostInsertEventListener {
 
     private static final String ASUNTO = "Validación de registro en Coordinate Times";
 
+    /**
+     * Metodo obtiene la instancia del usuario que fue registrado
+     * @return INSTANCE
+     */
     public static UsuarioInsertEventListener getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new UsuarioInsertEventListener();
@@ -43,6 +47,9 @@ public class UsuarioInsertEventListener implements PostInsertEventListener {
     }
 
     @Override
+    /**
+     * Metodo que envia un mensaje al usuario despues de insertarlo en la base de datos.
+     */
     public void onPostInsert(PostInsertEvent pie) {
         final Object entity = pie.getEntity();
         if (entity instanceof Usuario) {
@@ -51,10 +58,17 @@ public class UsuarioInsertEventListener implements PostInsertEventListener {
     }
 
     @Override
+    /**
+     * Metodo  que verifica que si se necesita hacer un commit
+     */
     public boolean requiresPostCommitHanding(EntityPersister ep) {
         return false;
     }
 
+    /**
+     * Metodo que envia un correo al usuario registrado
+     * @param usuario -- el usuario registrado
+     */
     public static void enviaMensaje(Usuario usuario) {
         try {
             MessageFormat format = new MessageFormat(MENSAJE);
@@ -65,6 +79,10 @@ public class UsuarioInsertEventListener implements PostInsertEventListener {
             Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    /**
+     * Metodo que envia un correo al usuario que es comentarista
+     * @param usuario -- el usuario comentarista
+     */
     public static void enviaMensajeInf(Usuario usuario) {
         try {
             MessageFormat format = new MessageFormat(MENSAJEINF);
@@ -76,6 +94,10 @@ public class UsuarioInsertEventListener implements PostInsertEventListener {
         }
     }
 
+    /**
+     * Metodo que obtiene la direccion ipAddress del quien mando el correo
+     * @return ipAddres
+     */
     private static String HOST() {
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String ipAddress = request.getHeader("X-FORWARDED-FOR");

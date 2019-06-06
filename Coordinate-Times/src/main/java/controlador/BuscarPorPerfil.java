@@ -41,6 +41,7 @@ public class BuscarPorPerfil {
     public UtilityT getU() {
         return u;
     }
+    
 /**
  * Método que asigna la instancia de UtilityT a guardar en el bean
  * @param u- La instancia de UtilityT a almacenar en el bean
@@ -57,6 +58,7 @@ public class BuscarPorPerfil {
     public String getCorreo(){
         return correo;
     }
+    
     /**
  * Método que asigna el correo a guardar en el bean
  * @param correo- el correo a almacenar
@@ -64,6 +66,7 @@ public class BuscarPorPerfil {
     public void setCorreo(String correo){
         this.correo = correo;
     }
+    
 /**
  * Método constructor de la clase BuscarConPerfil
  * 
